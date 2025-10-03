@@ -10,6 +10,7 @@ AIDA Can just be extracted from the rar (zipped) file in this github (in the fut
 
 <img width="3344" height="1971" alt="image" src="https://github.com/user-attachments/assets/de9e3159-1bc1-4439-9a71-a415b224ceca" />
 
+See png picture above.
 
 ## Requirements
 
