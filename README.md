@@ -1,39 +1,85 @@
 # AIDA
-AI Driven Acquisition
+AIDA
+AI-Directed Acquisition (AIDA) is a software package that enables AI-orchestrated autonomous mass spectrometry-based data acquisition on Thermo Fisher Scientifc Tribrid mass spectrometers (Orbitrap Eclipse and Orbitrap Ascend)
 
+## Running the Program:
 
-AIDA is a software method for real-time data acquisition of tribrid mass spectrometers.
-
-## Running:
-
-AIDA Can just be extracted from the rar (zipped) file in this github (in the future an installer will be included). The larger .exe application file with the AIDA icon has to be double clicked for it to open to this image below
+A .rar file is provided. Upon extraction, the larger .exe application file with the AIDA icon has to be double-clicked for it to open to this image below (or see png attached above.)
 
 <img width="3344" height="1971" alt="image" src="https://github.com/user-attachments/assets/de9e3159-1bc1-4439-9a71-a415b224ceca" />
 
-See png picture above.
 
 ## Requirements
 
-A Computer with windows 10 installed. (Tested on Windows 10 Pro, Version 21H2)
-
-A compatible Thermo Fisher Scientific Tribrid Mass Spectrometer (The current iteration of AIDA has only been tested on an Orbitrap Eclipse, however older builds did run on the Fusion.)
-
-Tune and XCalibur Tribrid software. Specifically, Tune 4.2.4310.9 and Xcalibur 4.7.69.37. The Tune version is important, as previous and later variants may contain bugs for certain calls performed by AIDA.
-
-All required .dll files are included in the zip, including thermo's API modules, however, API Access from thermo scientific is required for the API to access the instrument, which must be activated through Tune.
+Windows 10; the application was tested on Windows 10 Pro, Version 21H2
+A compatible Thermo Fisher Scientific Tribrid mass spectrometer including the Orbitrap Eclipse and the Orbitrap Ascend instruments (the application has been exclusively tested on an Orbitrap Eclipse)
+Tune and Xcalibur Tribrid software (Tune 4.2.4310.9 and Xcalibur 4.7.69.37).  The correct version of the Tune software is crucial; previous and later versions may not be able to successfully run the application.
+All required .dll files are included in the .rar file. This Comprise Thermo Fisher Scientific iapi modules.  API access must be approved by Thermo Fisher Scientifc and activated via the Tune software.
 
 ## Optional Requirements
-A fast multi-core CPU that can handle the processing required for optimal results 
-AIDA can run all of its code on the computers CPU, however for faster processing, an NVidia GPU with CUDA support can be used.
-All of our most recent data was tested with a NVIDIA RTX 4090 GPU, and both Intel i9-13900K and Intel i9-14900K processors.
-
+AIDA can be operated using high-performance multi-core CPUs (Intel i9-13900K or Intel i9-14900K). For faster processing we recommend Nvidia GPUs with CUDA support (tested on NVIDIA RTX 4090 GPU.
 
 ## Databases
-Below is a google drive link to a Cellline, Plasma mini, Plasam Full, and Breast Tumor Databases to be downloaded for use with AIDA. Our models along with appropriate python scripts used to generate databases will be available in the future.
+The Google Drive link includes target databases for using AIDA on cell line, blood plasma, and tumor samples. All databases are for samples of human origin. For plasma samples, two databases with the smaller version only including blood plasma protein peptides identified in our research group, while the larger database includes all possible peptides of the quantified proteins.
+
+https://drive.google.com/drive/folders/1Sd0ZnZC7aPbky6W1ear_jACevGKypAf7?usp=sharing   
+
+
 
 ## File outputs
-Current AIDA outputs 
-Although one can already extract out the data and process themselves, In the future, generic moka pot processing plus protein picking scripts will be included.
+
+AIDA provides the following files as outputs:
+(1) -filename-API-.csv
+This file provides information on the scoring of every targeted peptide from the analysis.
+For each peptide, the following information is provided in columns:
+MS2 ID:  MS2 scan ID
+cleanedEnds:  peptide sequence
+Reference:  Uniprot database protein entry string including the location of the protein in the Swissprot (sp) or Trembl (tr) component, the Uniprot protein accession number, and the Uniprot protein name—all separated by vertical lines.
+Charge:  peptide charge state
+DBMass:  peptide mass (Da)
+AdjustedMass:  corrected peptide ion mass deviation (ppm)
+OriginalMass:  uncorrected peptide ion mass deviation (ppm)
+currentOrder:  predicted peptide elution order adjusted in real-time
+peptidesOrder:  predicted peptide elution order from database
+PredScore:  peptide spectrum match score
+MS1 ID:  MS1 scan ID
+Time:  retention time (min)
+Cosine:  peptide spectrum match cosine similarity score
+Hit:  number of observed predicted fragment ions
+NumberPossible:  total number of fragment ions predicted to be observable
+CV:  FAIMS CV setting
+Analyzer:  mass analyzer used for detection
+Truth:  peptide annotation to forward or reversed (decoy) database component
+TotalIntOffFrags: total Intensity of MS2 fragment ions annotated to the target peptide
+MS2IntSum:  total MS2 signal intensity
+dCn:  “Hit” difference between top and following best match
+
+(2) MS2Called-filename-API-.csv
+This file provides information on each acquired MS2 spectrum.
+MS1 ID: MS1 scan ID
+ScanPoint:  m/z center of MS2 isolation window
+IT:  ion accumulation time
+IsoSize:  size of isolation window (m/z)
+Analyzer:  mass analyzer used for detection
+MS1 Score:  score reflecting likelihood of identifying new protein from the selected isolation window
+Resolution:  mass resolution used MS2 data acquisition
+
+
+(3) MS3Signal-filename-API-.csv
+This file provides information on each acquired MS3 spectrum.
+MS1 ID:  MS1 scan ID
+MS2 ID: MS2 scan ID
+MS3 ID: MS3 scan ID
+Peptide: peptide sequence
+Protein:  Uniprot database protein entry string including the location of the protein in the Swissprot (sp) or Trembl (tr) component, the Uniprot protein accession number, and the Uniprot protein name—all separated by vertical lines.
+126, 127n, 127c, 127d, 128n, 128nd, 128c, 128cd, 129n, 129nd, 129c, 129cd, 130n, 130nd, 130c, 130cd, 131n, 131nd, 131c, 131cd, 132n, 132nd, 132c, 132cd, 133n, 133nd, 133c, 133cd, 134n, 134nd, 134c, 134cd, 135n, 135nd, 135cd: signal intensity in TMT reporter ion channel (number of ions/millisecond)
+MS3IonSum: sum of reporter ion signal (number of ions/millisecond)
+MS3IIT: MS3 ion accumulation time (millisecond)
+MS3TotalCurr: “MS3IonSum” x “MS3IIT”
+massesChosen: MS2 fragment ions selected for MS3
+Round: first MS3 for the peptide (1) or salvage scan (2)
+
+
 
 ## Parameters selection
 AIDA requires a database to be selected (see above), and an output folder destination where it will output the results of its real-time acquisition.
@@ -41,7 +87,7 @@ The Run Number is just the unique number that will be assigned to each file to m
 
 The preset settings are tuned for a generic 3 hour TMT 18 sample, but can be altered as described below to maximize different gradients and samples. 
 
-##Acquisition settings:
+## Acquisition settings:
 
 TMT :
 This is the multiplexing used. Current databases are trained on TMT18 and TMT32 data, however we allow TMT11 to be used here as well. This changes the MS3 output files results, and which fragments the online AIDA search looks for in the MS3 to maximize signal to noise.
@@ -57,7 +103,7 @@ As different CV's cover different mass ranges, different cv's need fewer MS2s to
 
 Number of MSX Per MS1. As there is a processing requirement from when a MS1 is recieved, SIMS are generated, and MS2s are sent out, MSX discovery scans can be sent out to maximize acquisition per minute. These get sent out behind the SIM scan and therefore require no post MS1 processing time. Slower processors can take advantage by calling 1 or 2 MSX scans , whereas the fastest processors can have this set to 0.
 
-##MS3 Settings:
+## MS3 Settings:
 
 Target ions:
 We re-calculate SSN after the run finished, but in real-time use total ion signal to estimate if we have enough signal to match SSN. A SSN of 180 is roughly equivalent to 8 million 'ion' units of TMT fragments. Therefore, for TMT 18 we aim for 10 million ions to guarantee the great majority of peptides have enough signal. As noise is constant and doesn't scale with signal, less than double the signal is required for TMT32 samples. In our testing, 12.5 million ions for Target is usually enough.
@@ -80,7 +126,7 @@ This is the Orbitrap resolution used for MS3s. For TMT18 50k is all that is need
 Number of SPS if Original Fragments:
 AIDA uses predicted energy fragments so this setting is not used unless the 'Use Original MS3 fragments' toggle is enabled, but if it is, it will instead looking at the MS2 spectra at the same energy and choose n(number of sps) fragments post clean up for MS3.
 
-##Toggles
+## Toggles
 
 Use GPU:
 This enables GPU use for AIDA's peak scoring. If enabled and no gpu, AIDA will throw an error.
