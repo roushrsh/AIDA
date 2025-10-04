@@ -6,7 +6,7 @@ AI-Directed Acquisition (AIDA) is a software package that enables AI-orchestrate
 
 A .rar file is provided. Upon extraction, the larger .exe application file with the AIDA icon has to be double-clicked for it to open to this image below (or see png attached above.)
 
-<img width="3344" height="1971" alt="image" src="https://github.com/user-attachments/assets/de9e3159-1bc1-4439-9a71-a415b224ceca" />
+<img width="1894" height="1203" alt="image" src="https://github.com/user-attachments/assets/d1904b06-2655-43d2-bb64-4db2acaebfa4" />
 
 
 ## Requirements
