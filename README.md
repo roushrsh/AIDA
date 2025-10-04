@@ -141,68 +141,59 @@ massesChosen: MS2 fragment ions selected for MS3
 Round: first MS3 for the peptide (1) or salvage scan (2)
 
 
+For peptide filtering, we recommend the use of mokapot (PMID: 33596079) using the following data inputs:  Charge, Cosine, Hit, order Difference, Length of peptide, PredScore, log2(fragment ints +1), Log2 (fragment ints/total ints +1), dCn, hits/Possible Ratio
+
+For protein filtering, we recommend the use of the “picked” protein method (PMID: 25987413).
+
+MS3 data are re-processed offline using the Thermo Fisher Scientific Raw Reader.
+
 
 ## Parameters selection
-AIDA requires a database to be selected (see above), and an output folder destination where it will output the results of its real-time acquisition.
-The Run Number is just the unique number that will be assigned to each file to make it unique for the run. (in our case we match the row on Xcalibur).
 
-The preset settings are tuned for a generic 3 hour TMT 18 sample, but can be altered as described below to maximize different gradients and samples. 
+Running AIDA requires the selection of a database, and the setting of an output folder destination.. The Run Number is a unique number that will be assigned to each file.
+
+The default settings are optimized for a regular generic 3-hour TMT18 sample analysis, but can be altered as described below to optimize the results for different gradients and samples.
+
 
 ## Acquisition settings:
 
-TMT :
-This is the multiplexing used. Current databases are trained on TMT18 and TMT32 data, however we allow TMT11 to be used here as well. This changes the MS3 output files results, and which fragments the online AIDA search looks for in the MS3 to maximize signal to noise.
+TMT :  TMT reagents used for multiplexing (TMT18 or TMT35)
 
-Run Time (min):
-This is the length of your gradient. By default, AIDA does not scan in the first 2 minutes, and stops acquiring roughly 20 seconds before the run is over.
+Run Time (min): The length of the LC gradient (data acquisition time) in minutes.
 
-FAIMS CVs:
-These are the 3 CV's always cycled in AIDA and can be varied, however our testing shows the optimal three to be roughly -40,-55 and -70.
+FAIMS CVs:  AIDA cycles through 3 FAIMS CV settings.  Our testing showed that the optimal settings to -40, -55 and -70 V.
 
-MS2 Scans Per CV:
-As different CV's cover different mass ranges, different cv's need fewer MS2s to cover the range. This goes hand in hand with shorter gradients being able to accomodate fewer MS2s before the elution peak dissapears.
+MS2 Scans Per CV:  As different CV settings give signal distributions centered at different mass ranges, the number of MS2 to cover these m/z ranges also differs.
 
-Number of MSX Per MS1. As there is a processing requirement from when a MS1 is recieved, SIMS are generated, and MS2s are sent out, MSX discovery scans can be sent out to maximize acquisition per minute. These get sent out behind the SIM scan and therefore require no post MS1 processing time. Slower processors can take advantage by calling 1 or 2 MSX scans , whereas the fastest processors can have this set to 0.
+Number of MSX Per MS1:  As there is a processing time between the receiving of MS1 signals, the generation of SIM scans, and the calling of MS2 scans, multiplexed MS2 (MSX) discovery scans can be called to maximize data acquisition efficiency.  When using slower processors, calling 1 to 2 MSX scans will benefit the proteome coverage, whereas the number should be set to 0 when faster processors are used.
+
 
 ## MS3 Settings:
 
-Target ions:
-We re-calculate SSN after the run finished, but in real-time use total ion signal to estimate if we have enough signal to match SSN. A SSN of 180 is roughly equivalent to 8 million 'ion' units of TMT fragments. Therefore, for TMT 18 we aim for 10 million ions to guarantee the great majority of peptides have enough signal. As noise is constant and doesn't scale with signal, less than double the signal is required for TMT32 samples. In our testing, 12.5 million ions for Target is usually enough.
+Target ions:  Recommended settings are 1x107 for TMT18 and 1.25x107 for TMT35.
 
-MS3 Ions Round 2 SSN Cutoff:
-When the peptide comes back, a salvage MS3 scan can be sent to get enough signal for the target peptide. We generally set this to a lower value, to give it a chance at actually getting enough signal.
+Salvage MS3 scan signal-to-noise threshhold: Recommended settings are 8x106 for TMT18 and 1.15x107 for TMT35
 
-Min MS3 Time (ms): 
-This is the minimum time an MS3 will ever be sent for. Generally recommended to be 200 ms for an average sample, but can be as low as the 50k cycle time of 86ms if high enough concentrations are used for cell lines (ex 20 ug/ul per shot). 
+Min MS3 Time (ms):  a setting of 200 milliseconds is our default recommendation, it can be lowered for samples with high overall protein concentrations (e.g., cell line samples)
+.
+Max MS3 Time (ms):  300 milliseconds for cell line and tumor samples, 1000 milliseconds for blood plasma samples.
 
-Max MS3 Time (ms):
-This is the maximum amount of time alotted to an MS3. If it will take longer, it will default to this value.
+Max MS3 Time Second Round (ms):  1000 milliseconds
 
-Max MS3 Time Second Round (ms):
-This is for the salvage scan. Similar to the Max MS3 Time, this is the max alotted time for a second round.
+MS3 Resolution:  5x104 for TMT18, 9x104 for TMT35.
 
-MS3 Resolution:
-This is the Orbitrap resolution used for MS3s. For TMT18 50k is all that is needed, but TMT32 requires 75k or 90k. 
+Number of SPS if Original Fragments:  AIDA uses predicted energy fragments.  Therefore, this setting will not be considered unless the 'Use Original MS3 fragments' toggle is enabled.  If enabled, a setting of 5 is recommended.
 
-Number of SPS if Original Fragments:
-AIDA uses predicted energy fragments so this setting is not used unless the 'Use Original MS3 fragments' toggle is enabled, but if it is, it will instead looking at the MS2 spectra at the same energy and choose n(number of sps) fragments post clean up for MS3.
 
 ## Toggles
+Use GPU:  This enables GPU use for AIDA's peak scoring.
 
-Use GPU:
-This enables GPU use for AIDA's peak scoring. If enabled and no gpu, AIDA will throw an error.
+Call Round 2 Scans: This allows for salvage MS3 scans to be called.
 
-Call Round 2 Scans:
-This allows for salvage round 2 scans to be called. These only get called if the estimated time is below the max afforded time.
+Minimum for Overs:  Optimizes the time for the calling for salvage MS3 scan acquisitions.  We recommend using this toggle for efficient salvage MS3 scan use.
 
-Minimum for Overs:
-If a scan is going to take longer than the Max MS3 time, this check will force AIDA to call a scan at the minimum MS3 time instead of the maximum. This way, if the peptide is about to elute, we will see signal go up and the rest can be salvaged during the second round, and if it's not going to elute, time won't be wasted on the follow up scan.
+Use Original MS3 Fragments:  This will ignore our MS2 peptide intensity prediction when selecting MS2 fragment ions for MS3.  Its use is not recommended.
 
-Use Original MS3 Fragments:
-As described above, this forces AIDA to choose fragments at the observed MS2 spectra + collision energy, over predicted ones.
+Predicted MS3 Cycle times to Consider:  Large sample amounts can be run with “Fastest” setting, for lower amounts “Slow” and “Normal” will be the optimal settings.  This setting influences the data acquisition speed and should be optimized for each sample type.
 
-Predicted MS3 Cycle times to Consider:
-The AIDA MS3 accumulation model predicts an estimate time to achieve the designated signal based on observed MS2 fragment intensities (ex: aim for 10 million ions). However it also provides error estimates at 1 and 2 standard deviations. The longest accumulation time that falls below the max MS3 time is what is ultimately taken. To cover enough ground, most peptides don't require the slowest, ie longest amount of accumulation time, to reach the target SSN, buit if targets are rare, ex for plasma, this could be useful to maximize signal.
-
-Force Analyzer Cycle time:
-This forces all MS3s to perform their first scan at the analyzers cycle time (86 ms for 50k, and 131ms for TMT 32), the idea being that if needed, the second round scan will get the remaining required signal.
+Force Analyzer Cycle time: This forces all MS3s to perform their first scan at the analyzer's cycle time (86 ms for 50k, and 131ms for TMT 35), so that the salvage MS3 scan will be optimized for reaching the target signal threshold.  Only recommended when analyzing large sample amounts.
