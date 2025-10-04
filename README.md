@@ -2,25 +2,39 @@
 AIDA
 AI-Directed Acquisition (AIDA) is a software package that enables AI-orchestrated autonomous mass spectrometry-based data acquisition on Thermo Fisher Scientifc Tribrid mass spectrometers (Orbitrap Eclipse and Orbitrap Ascend)
 
+
 ## Running the Program:
 
+
 A .rar file is provided. Upon extraction, the larger .exe application file with the AIDA icon has to be double-clicked for it to open to this image below (or see png attached above.)
+
 
 <img width="1894" height="1203" alt="image" src="https://github.com/user-attachments/assets/d1904b06-2655-43d2-bb64-4db2acaebfa4" />
 
 
+
 ## Requirements
 
+
 Windows 10; the application was tested on Windows 10 Pro, Version 21H2
+
 A compatible Thermo Fisher Scientific Tribrid mass spectrometer including the Orbitrap Eclipse and the Orbitrap Ascend instruments (the application has been exclusively tested on an Orbitrap Eclipse)
+
 Tune and Xcalibur Tribrid software (Tune 4.2.4310.9 and Xcalibur 4.7.69.37).  The correct version of the Tune software is crucial; previous and later versions may not be able to successfully run the application.
+
 All required .dll files are included in the .rar file. This Comprise Thermo Fisher Scientific iapi modules.  API access must be approved by Thermo Fisher Scientifc and activated via the Tune software.
 
+
 ## Optional Requirements
+
 AIDA can be operated using high-performance multi-core CPUs (Intel i9-13900K or Intel i9-14900K). For faster processing we recommend Nvidia GPUs with CUDA support (tested on NVIDIA RTX 4090 GPU.
 
+
+
 ## Databases
+
 The Google Drive link includes target databases for using AIDA on cell line, blood plasma, and tumor samples. All databases are for samples of human origin. For plasma samples, two databases with the smaller version only including blood plasma protein peptides identified in our research group, while the larger database includes all possible peptides of the quantified proteins.
+
 
 https://drive.google.com/drive/folders/1Sd0ZnZC7aPbky6W1ear_jACevGKypAf7?usp=sharing   
 
@@ -28,55 +42,102 @@ https://drive.google.com/drive/folders/1Sd0ZnZC7aPbky6W1ear_jACevGKypAf7?usp=sha
 
 ## File outputs
 
+
 AIDA provides the following files as outputs:
+
 (1) -filename-API-.csv
+
 This file provides information on the scoring of every targeted peptide from the analysis.
+
 For each peptide, the following information is provided in columns:
+
 MS2 ID:  MS2 scan ID
+
 cleanedEnds:  peptide sequence
+
 Reference:  Uniprot database protein entry string including the location of the protein in the Swissprot (sp) or Trembl (tr) component, the Uniprot protein accession number, and the Uniprot protein name—all separated by vertical lines.
+
 Charge:  peptide charge state
+
 DBMass:  peptide mass (Da)
+
 AdjustedMass:  corrected peptide ion mass deviation (ppm)
+
 OriginalMass:  uncorrected peptide ion mass deviation (ppm)
+
 currentOrder:  predicted peptide elution order adjusted in real-time
+
 peptidesOrder:  predicted peptide elution order from database
+
 PredScore:  peptide spectrum match score
+
 MS1 ID:  MS1 scan ID
+
 Time:  retention time (min)
+
 Cosine:  peptide spectrum match cosine similarity score
+
 Hit:  number of observed predicted fragment ions
+
 NumberPossible:  total number of fragment ions predicted to be observable
+
 CV:  FAIMS CV setting
+
 Analyzer:  mass analyzer used for detection
+
 Truth:  peptide annotation to forward or reversed (decoy) database component
+
 TotalIntOffFrags: total Intensity of MS2 fragment ions annotated to the target peptide
+
 MS2IntSum:  total MS2 signal intensity
+
 dCn:  “Hit” difference between top and following best match
 
+
 (2) MS2Called-filename-API-.csv
+
 This file provides information on each acquired MS2 spectrum.
+
 MS1 ID: MS1 scan ID
+
 ScanPoint:  m/z center of MS2 isolation window
+
 IT:  ion accumulation time
+
 IsoSize:  size of isolation window (m/z)
+
 Analyzer:  mass analyzer used for detection
+
 MS1 Score:  score reflecting likelihood of identifying new protein from the selected isolation window
+
 Resolution:  mass resolution used MS2 data acquisition
 
 
+
 (3) MS3Signal-filename-API-.csv
+
 This file provides information on each acquired MS3 spectrum.
+
 MS1 ID:  MS1 scan ID
+
 MS2 ID: MS2 scan ID
+
 MS3 ID: MS3 scan ID
+
 Peptide: peptide sequence
+
 Protein:  Uniprot database protein entry string including the location of the protein in the Swissprot (sp) or Trembl (tr) component, the Uniprot protein accession number, and the Uniprot protein name—all separated by vertical lines.
+
 126, 127n, 127c, 127d, 128n, 128nd, 128c, 128cd, 129n, 129nd, 129c, 129cd, 130n, 130nd, 130c, 130cd, 131n, 131nd, 131c, 131cd, 132n, 132nd, 132c, 132cd, 133n, 133nd, 133c, 133cd, 134n, 134nd, 134c, 134cd, 135n, 135nd, 135cd: signal intensity in TMT reporter ion channel (number of ions/millisecond)
+
 MS3IonSum: sum of reporter ion signal (number of ions/millisecond)
+
 MS3IIT: MS3 ion accumulation time (millisecond)
+
 MS3TotalCurr: “MS3IonSum” x “MS3IIT”
+
 massesChosen: MS2 fragment ions selected for MS3
+
 Round: first MS3 for the peptide (1) or salvage scan (2)
 
 
