@@ -74,6 +74,9 @@ Use the defaults for the first run unless you have a reason to change them. The 
 
 <h2>Advanced</h2>
 Advanced controls are initially locked to protect method defaults. Click an individual lock to edit a row, or use Unlock all when deliberately configuring a custom method.
+<img width="1475" height="870" alt="image" src="https://github.com/user-attachments/assets/95958924-80d4-4792-9d37-35013c7b3a4a" />
+<img width="725" height="72" alt="image" src="https://github.com/user-attachments/assets/069f509b-08f6-4935-98e2-32b3ceba858b" />
+
 FAIMS and scan schedule
 FAIMS CVs: the three compensation voltages used by the method. Defaults are `-40`, `-55`, and `-70`.
 MS2 scans per CV: scheduling budget for each FAIMS CV.
@@ -97,6 +100,8 @@ Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest 
 
 <h2>Environment Check</h2>
 Use this tab before Database generator, Offline search, Post Run Script, or Transfer Learn.
+<img width="1472" height="865" alt="image" src="https://github.com/user-attachments/assets/051a26a8-da46-429b-87aa-ecbd75bc0e75" />
+
 Select the Python executable used by the AIDA tools.
 Click Check environment.
 Review checks for Python, pip, .NET, `OfflineSearch.dll`, `search_methods.py`, and the required Python packages.
@@ -105,6 +110,9 @@ Installing packages modifies the selected Python environment. Confirm that its p
 
 <h2>Database generator</h2>
 This tab produces the peptide database consumed by AIDA workflows.
+<img width="1467" height="860" alt="image" src="https://github.com/user-attachments/assets/f60c490c-5523-4d84-84b9-260ab42ba8d5" />
+<img width="402" height="722" alt="image" src="https://github.com/user-attachments/assets/6c9f734a-2bb9-4d64-84d3-284b4edbf9b0" />
+
 Input and build mode
 Select peptide/protein text input or FASTA input, then select the TMT label profile. Choose:
 Full build to generate all selected database-model columns.
@@ -125,8 +133,11 @@ Score one model
 Choose FAIMS, Fragment, Order, Charge, or Fly, then choose the applicable version. The Collision/Energy controls appear only for Fragment V2-Beta scoring.
 Generate
 Choose an output database filename, select the Python executable, choose whether to use GPU, then click Generate database. The output panel reports peptide and database-entry counts, and the log records the invoked workflow.
-Offline search
+
+<h2>Offline search</h2>
 Offline search runs the supporting search workflow on a RAW file and reports peptide/protein counts.
+<img width="1480" height="877" alt="image" src="https://github.com/user-attachments/assets/ac1fe3dc-6728-469c-91b4-396a35ff9136" />
+
 Choose the RAW file.
 Choose the database: either a CSV/TSV database or a packed database directory.
 Select a writable output root.
@@ -141,6 +152,8 @@ Select Python and click Run search.
 The result panel reports unique peptides, unique proteins, sieved proteins, and—when MS3 quantification is attached—proteins above the SSN cutoff. Use Open output folder to inspect the run products.
 
 <h2>Post Run Script</h2>
+<img width="1480" height="872" alt="image" src="https://github.com/user-attachments/assets/efc6ff7a-f46e-45c0-9cfe-59a2ba948a19" />
+
 This is the normal downstream step after an AIDA acquisition. It runs post-run protein sieving with mokapot and can run MS3 TMT quantification.
 After an AIDA run, Chopin CSV, MS3Signal CSV, and output-folder fields are automatically filled. You normally only need to choose the RAW file.
 Provide the RAW file, Chopin CSV, MS3Signal CSV, and output folder. The latter three may already be populated after acquisition.
@@ -150,6 +163,8 @@ Choose the Python executable and click Run.
 With quantification disabled, the tab performs the sieving workflow without requiring RAW/MS3Signal input. The results panel reports peptides at 1%, sieved proteins, and proteins above SSN when quantification was run.
 
 <h2>Gradient Cal</h2>
+<img width="1475" height="870" alt="image" src="https://github.com/user-attachments/assets/1d727855-0525-42a3-a73f-88d1a15da6d1" />
+
 Gradient Cal proposes a revised `%B` program using a target database and a calibration run.
 Step 1 — Target database: select the database, set the retention-order column (default column 4), and click Read. The app reports unique peptide count and median order.
 Step 2 — Coverage target: select the desired order/coverage target. The interface shows the corresponding fraction of the database.
@@ -158,6 +173,8 @@ Click Optimize gradient.
 The result side displays fit quality (R²), coverage, CV, the calibration line, a proposed gradient table, and a chart comparing the original and proposed programs. Review the proposed program against instrument, column, and solvent constraints before using it.
 
 <h2>Transfer Learn</h2>
+<img width="1482" height="870" alt="image" src="https://github.com/user-attachments/assets/f0f26899-f863-4909-aa60-cfac3b24677c" />
+
 Transfer Learn adapts the retention-time model to your LC column using observations from multiple runs.
 Provide a runs CSV containing `peptide`, `time`, and `run_id`, with at least two runs.
 Select the base retention-time model.
@@ -168,6 +185,8 @@ Select a Python environment with the required GPU/Torch dependencies and click R
 The output folder receives the adapted model and plots. Use the old-vs-new comparison on the held-out run, rather than training loss alone, to decide whether the adaptation is beneficial.
 
 <h2>Run</h2>
+<img width="1482" height="867" alt="image" src="https://github.com/user-attachments/assets/743787d7-516d-4fb0-a97c-2f8136df1e2c" />
+
 The Run tab is the acquisition monitor. It displays startup output and then a concise set of live metrics, including current order, total proteins, and unique proteins with MS3 evidence. The full engine log is written to a timestamped file in the application log directory.
 Use Stop run — save && finish to end the acquisition gracefully. It requests cancellation, writes run outputs, and completes the normal shutdown path. Do not terminate the process externally unless the application is unresponsive and you accept the risk of incomplete output.
 
