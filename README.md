@@ -55,6 +55,9 @@ At completion, open Post Run Script. AIDA pre-fills its Chopin/MS3Signal/output 
 
 <h2>Main</h2>
 The Main tab contains the minimum settings needed to start an acquisition.
+
+<img width="1477" height="867" alt="image" src="https://github.com/user-attachments/assets/ff7f2d69-ca38-4f8b-ba61-ab7a4535b0a8" />
+
 Files and run
 Control	Purpose
 Run number	Identifier used in generated output names.
