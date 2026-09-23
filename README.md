@@ -1,5 +1,5 @@
 
-<h1>AIDA — AI-Driven Acquisition
+<h1>AIDA — AI-Driven Acquisition</h1>
 
 <img width="153" height="102" alt="image" src="https://github.com/user-attachments/assets/393bd92c-a366-411b-9dd3-d1b5ceadb0be" />
 
