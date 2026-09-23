@@ -23,49 +23,26 @@ AIDA can be downloaded from this Github Directory as AIDAv1p0.exe
 <h1>Table of Contents</h1>
 
 Before you start\
-Recommended first workflow
-
-Main
-
-Advanced
-
-Database generator
-
-Offline search
-
-Post Run Script
-
-Gradient Cal
-
-Transfer Learn
-
-Run
-
+Main\
+Advanced\
+Database generator\
+Offline search\
+Post Run Script\
+Gradient Cal\
+Transfer Learn\
+Run\
 Troubleshooting
 
 
-<h3>**Before you start**</h3>
-DIA-NN is written for Windows and requires XCalibur 4.5 or higher, Tune 4.2xxx and iAPI Access. AIDA has been tested on fast multithread CPU's, for our use case a i9 14900 was used.
+<h3>**Before you start**</h3>\
+AIDA is written for Windows and requires XCalibur 4.5 or higher, Tune 4.2.4310.9 and iAPI Access. AIDA has been tested on an Intel i9 14900K, results may differ on slower CPU's.\
+We have provided sample Cell-line, Plasma and Breast-Tumor-Tissue databases, but users can generate their own using FASTA files or the recommended observed peptide libraries.  (see Database Generator).\
+A valid Python executable for the Python-backed tools is needed along with the necessary libraries. (See the Environment Check module.)\
 
-We have provided a sample cell-line, plasma and breast-tissue databases. However 
-What you need
-A Windows computer with the instrument/API dependencies required by the acquisition installation.
-A valid Python executable for the Python-backed tools. Use Environment Check to verify it.
-A peptide/protein database for acquisition or search. The database generator accepts peptide/protein text input or FASTA input and writes the database used by AIDA workflows.
-For acquisition: a writable output directory and the database to use.
-For offline search: a Thermo `.raw` file, a CSV database or packed database directory, an output root, and the offline-search Python environment.
 
 <h3>**Start the application**</h3>
-For a development build, launch `AIDAv1p0.exe` . Release builds should be launched from their corresponding release directory. Keep the executable together with its dependency files.
+After downloading, launch `AIDAv1p0.exe`. Keep the executable together with its dependency files.
 
-<h3>**Recommended first workflow**</h3>
-For a first test, use a small database and a short or representative RAW file.
-Open Environment Check and point it to the Python interpreter used for AIDA tools. Click Check environment. Install only missing packages after confirming the selected Python path.
-Use Database generator to create or refresh a database, or select an existing compatible database.
-On Main, set the run number, database, output directory, TMT plex, run length, AIDA+ setting, and Smart Caller mode.
-Review Advanced. Defaults are intended to preserve the configured method behavior; unlock a row only when you intend to override it.
-Confirm instrument readiness, then click Start on Main. Monitor progress on Run.
-At completion, open Post Run Script. AIDA pre-fills its Chopin/MS3Signal/output fields; choose the RAW file and run sieving, with optional MS3 TMT quantification.
 
 <h2>Main</h2>
 The Main tab contains the minimum settings needed to start an acquisition.
@@ -203,6 +180,15 @@ The output folder receives the adapted model and plots. Use the old-vs-new compa
 
 The Run tab is the acquisition monitor. It displays startup output and then a concise set of live metrics, including current order, total proteins, and unique proteins with MS3 evidence. The full engine log is written to a timestamped file in the application log directory.
 Use Stop run — save && finish to end the acquisition gracefully. It requests cancellation, writes run outputs, and completes the normal shutdown path. Do not terminate the process externally unless the application is unresponsive and you accept the risk of incomplete output.
+
+<h3>**Recommended first workflow**</h3>
+For a first test, we recommend making a TMTPro Zero labeled standard Hela sample as described in the AIDA Manuscript (PMID) and running with our cell line database. 
+Open Environment Check and point it to the Python interpreter used for AIDA tools. Click Check environment. Install only missing packages after confirming the selected Python path.
+Use Database generator to create or refresh a database, or select an existing compatible database.
+On Main, set the run number, database, output directory, TMT plex, run length, AIDA+ setting, and Smart Caller mode.
+Review Advanced. Defaults are intended to preserve the configured method behavior; unlock a row only when you intend to override it.
+Confirm instrument readiness, then click Start on Main. Monitor progress on Run.
+At completion, open Post Run Script. AIDA pre-fills its Chopin/MS3Signal/output fields; choose the RAW file and run sieving, with optional MS3 TMT quantification.
 
 For each run, retain:
 The input database and its generation settings.
