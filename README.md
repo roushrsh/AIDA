@@ -25,14 +25,15 @@ AIDA can be downloaded from this Github Directory as AIDAv1p0.exe
 
 * [Before you start](#before-you-start)
 * [Main](#main)
-* [Advanced](#advanced)
-* [Database generator](#database-generator)
-* [Offline search](#offline-search)
+* [Environment Check](#environment-check)
 * [Post Run Script](#post-run-script)
+* [Database Generator](#database-generator)
+* [Offline search](#offline-search)
 * [Gradient Cal](#gradient-cal)
 * [Transfer Learn](#transfer-learn)
 * [Run](#run)
-* [Troubleshooting](#troubleshooting)
+* [Advanced](#advanced)
+
 
 <h3>Before you start</h3>
 AIDA is written for Windows and requires XCalibur 4.5 or higher, Tune 4.2.4310.9 and iAPI Access. AIDA has been tested on an Intel i9 14900K, results may differ on slower CPU's.\
@@ -59,30 +60,6 @@ At the top the user chooses the Database they would like to use for real-time ac
 
 From there, the user queues the gradient (See 'SampleAIDAGradient.meth'), and hits "Start" to begin acquisition.
 
-<h2>Advanced</h2>
-Advanced controls are initially locked to protect method defaults. Click an individual lock to edit a row, or use "Unlock all" when deliberately configuring a custom method.
-
-<img width="1475" height="870" alt="image" src="https://github.com/user-attachments/assets/95958924-80d4-4792-9d37-35013c7b3a4a" />
-<img width="725" height="72" alt="image" src="https://github.com/user-attachments/assets/069f509b-08f6-4935-98e2-32b3ceba858b" />
-
-FAIMS CVs: the three compensation voltages used by the method. Defaults are `-40`, `-55`, and `-70`.\
-MS2 scans per CV: scheduling budget for each FAIMS CV.\
-MSX per MS1: number of MSX scans associated with each MS1 event.\
-Use GPU: enables GPU use where supported. Default is off.\
-Starting order (mid-run): starting elution-order position from `0` to `1`; normally leave at `0`.\
-Target MS3 ions and MS3 ion cutoff: ion targets used for MS3 calling.\ 
-MS3 SSN target: signal-to-noise criterion for MS3 calls.\
-Min/Max MS3 time and round-2 max time: injection-time bounds in milliseconds. \
-MS3 resolution: 50K, 75K, or 90K.\
-SPS: number of synchronous precursor selection fragments when original fragments are used. \
-Call round 2 scans: enables the second-round scan behavior. \
-Minimum for overs: preserves the minimum-fill behavior for overs.\
-Use original MS3 fragments: requests the real-time energy observed original MS3 fragment behavior.\
-Force analyzer cycle time: applies a fixed analyzer-cycle-time behavior. \
-Plasma mode: allows longer, approximately two-second MS3 injection behavior. \
-Wide MS2 ppm: uses ±12 ppm rather than the ±6 ppm setting. \
-Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest predicted cycle times can be considered. Normal, Fast, and Fastest are enabled by default.
-
 <h2>Environment Check</h2>
 
 Use this tab to check if all required installations are present.
@@ -94,7 +71,18 @@ Click Check environment.\
 If packages are missing, edit the package list if needed and click Install packages.
 Installing packages modifies the selected Python environment. Confirm that its path is the intended environment before clicking Install.
 
-<h2>Database generator</h2>
+<h2>Post Run Script</h2>
+<img width="1480" height="872" alt="image" src="https://github.com/user-attachments/assets/efc6ff7a-f46e-45c0-9cfe-59a2ba948a19" />
+
+This is the normal downstream step after an AIDA acquisition. It runs post-run protein sieving with mokapot and performs MS3 TMT quantification. \
+After an AIDA run, Chopin CSV, MS3Signal CSV, and output-folder fields are automatically filled and it can be run. You will still need to choose the RAW file. 
+Otherwise, provide the RAW file, Chopin CSV, MS3Signal CSV, and output folder. The latter three may already be populated after acquisition.\
+Enable or disable Run Quantification (MS3 TMT). If quantification is enabled, select the TMT plex and SSN cutoff. Defaults are 180 for TMT18 and 350 for TMT35.\
+Choose the Python executable directory location and click Run.\
+With quantification disabled, the tab performs the sieving workflow without requiring RAW/MS3Signal input. The results panel reports peptides at 1%, sieved proteins, and proteins above SSN when quantification was run.
+
+
+<h2>Database Generator</h2>
 This tab produces the peptide database consumed by AIDA workflows.
 
 <img width="1467" height="860" alt="image" src="https://github.com/user-attachments/assets/f60c490c-5523-4d84-84b9-260ab42ba8d5" />
@@ -125,16 +113,6 @@ Score one model settings:\
 Choose FAIMS, Fragment, Order, Charge, or Fly, then choose the applicable version. The Collision/Energy controls appear only for Fragment V2-Beta scoring.
 
 Choose an output database filename, select the Python executable, choose whether to use GPU, then click Generate database. The output panel reports peptide and database-entry counts, and the log records the invoked workflow.
-
-<h2>Post Run Script</h2>
-<img width="1480" height="872" alt="image" src="https://github.com/user-attachments/assets/efc6ff7a-f46e-45c0-9cfe-59a2ba948a19" />
-
-This is the normal downstream step after an AIDA acquisition. It runs post-run protein sieving with mokapot and performs MS3 TMT quantification. \
-After an AIDA run, Chopin CSV, MS3Signal CSV, and output-folder fields are automatically filled and it can be run. You will still need to choose the RAW file. 
-Otherwise, provide the RAW file, Chopin CSV, MS3Signal CSV, and output folder. The latter three may already be populated after acquisition.\
-Enable or disable Run Quantification (MS3 TMT). If quantification is enabled, select the TMT plex and SSN cutoff. Defaults are 180 for TMT18 and 350 for TMT35.\
-Choose the Python executable directory location and click Run.\
-With quantification disabled, the tab performs the sieving workflow without requiring RAW/MS3Signal input. The results panel reports peptides at 1%, sieved proteins, and proteins above SSN when quantification was run.
 
 <h2>Offline search</h2>
 Offline search runs the supporting search workflow on a RAW file and reports peptide/protein counts. Note: this is only recommended if the real-time search files are lost, otherwise use the Post Run Script.
@@ -186,4 +164,30 @@ The Run tab is the acquisition monitor. It displays startup output and then a co
 <h3>**Recommended first workflow**</h3>
 For a first test, we recommend preparing a TMTPro Zero labeled standard Hela sample as described in the AIDA Manuscript (PMID) and running with our cell line database using the default settings post gradient adjustment.
 At completion, open Post Run Script.
+
+
+<h2>Advanced</h2>
+Advanced controls are initially locked to protect method defaults. Click an individual lock to edit a row, or use "Unlock all" when deliberately configuring a custom method.
+
+<img width="1475" height="870" alt="image" src="https://github.com/user-attachments/assets/95958924-80d4-4792-9d37-35013c7b3a4a" />
+<img width="725" height="72" alt="image" src="https://github.com/user-attachments/assets/069f509b-08f6-4935-98e2-32b3ceba858b" />
+
+FAIMS CVs: the three compensation voltages used by the method. Defaults are `-40`, `-55`, and `-70`.\
+MS2 scans per CV: scheduling budget for each FAIMS CV.\
+MSX per MS1: number of MSX scans associated with each MS1 event.\
+Use GPU: enables GPU use where supported. Default is off.\
+Starting order (mid-run): starting elution-order position from `0` to `1`; normally leave at `0`.\
+Target MS3 ions and MS3 ion cutoff: ion targets used for MS3 calling.\ 
+MS3 SSN target: signal-to-noise criterion for MS3 calls.\
+Min/Max MS3 time and round-2 max time: injection-time bounds in milliseconds. \
+MS3 resolution: 50K, 75K, or 90K.\
+SPS: number of synchronous precursor selection fragments when original fragments are used. \
+Call round 2 scans: enables the second-round scan behavior. \
+Minimum for overs: preserves the minimum-fill behavior for overs.\
+Use original MS3 fragments: requests the real-time energy observed original MS3 fragment behavior.\
+Force analyzer cycle time: applies a fixed analyzer-cycle-time behavior. \
+Plasma mode: allows longer, approximately two-second MS3 injection behavior. \
+Wide MS2 ppm: uses ±12 ppm rather than the ±6 ppm setting. \
+Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest predicted cycle times can be considered. Normal, Fast, and Fastest are enabled by default.
+
 
