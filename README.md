@@ -49,19 +49,15 @@ The Main tab contains the minimum settings needed to start an acquisition.
 
 <img width="1477" height="867" alt="image" src="https://github.com/user-attachments/assets/ff7f2d69-ca38-4f8b-ba61-ab7a4535b0a8" />
 
-Files and run
-Control	Purpose
-Run number	Identifier used in generated output names.
-Database	Select the AIDA peptide database for the run.
-Output	Select a writable folder for run outputs and logs.
-Start	Validates the database and output folder, then begins acquisition.
-Method tiles
-Control	Meaning
-TMT Plex	Select the 18- or 35-channel profile. Internally, the 35-channel selection is represented using the application’s 32-channel setting.
-Run time	Maximum acquisition duration in minutes.
-AIDA+	Higher-signal, faster-acquisition mode.
-Smart Caller	Full uses the more complete decision logic; Light favors faster operation.
-Use the defaults for the first run unless you have a reason to change them. The Main tab deliberately keeps method configuration compact; detailed settings are on Advanced.
+Options are:
+1. Whether the user is using TMT 18, or TMT 35. 
+2. The Run time of the Gradient. 
+3. Whether to use the more sensitive AIDA+.
+4. The faster or slower caller.
+
+At the top the user chooses the Database they would like to use for real-time acquisition, the Output directory for AIDA, and the run number (Recommended to correspond to the Xcalibur ID).
+
+From there, the user queues the gradient (See 'SampleAIDAGradient.meth')
 
 <h2>Advanced</h2>
 Advanced controls are initially locked to protect method defaults. Click an individual lock to edit a row, or use Unlock all when deliberately configuring a custom method.
