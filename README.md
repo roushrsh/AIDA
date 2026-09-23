@@ -22,17 +22,17 @@ AIDA can be downloaded from this Github Directory as AIDAv1p0.exe
 
 <h1>Table of Contents</h1>
 
-Before you start\
-Main\
-Advanced\
-Database generator\
-Offline search\
-Post Run Script\
-Gradient Cal\
-Transfer Learn\
-Run\
-Troubleshooting
 
+* [Before you start](#before-you-start)
+* [Main](#main)
+* [Advanced](#advanced)
+* [Database generator](#database-generator)
+* [Offline search](#offline-search)
+* [Post Run Script](#post-run-script)
+* [Gradient Cal](#gradient-cal)
+* [Transfer Learn](#transfer-learn)
+* [Run](#run)
+* [Troubleshooting](#troubleshooting)
 
 <h3>Before you start</h3>
 AIDA is written for Windows and requires XCalibur 4.5 or higher, Tune 4.2.4310.9 and iAPI Access. AIDA has been tested on an Intel i9 14900K, results may differ on slower CPU's.\
