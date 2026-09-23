@@ -47,8 +47,7 @@ After downloading, launch `AIDAv1p0.exe`. Keep the executable together with its 
 
 <h2>Main</h2>
 The Main tab contains the minimum settings needed to start an acquisition.
-
-<img width="1477" height="867" alt="image" src="https://github.com/user-attachments/assets/ff7f2d69-ca38-4f8b-ba61-ab7a4535b0a8" />
+<img width="1482" height="1326" alt="image" src="https://github.com/user-attachments/assets/ce845b2b-7aa0-4754-964e-a723b44b3468" />
 
 Options are:
 1. If the sample is TMT 18, or TMT 35. 
