@@ -173,7 +173,7 @@ Click Optimize gradient.
 The result side displays fit quality (R²), coverage, CV, the calibration line, a proposed gradient table, and a chart comparing the original and proposed programs. Review the proposed program against instrument, column, and solvent constraints before using it.
 
 <h2>Transfer Learn</h2>
-<img width="1482" height="870" alt="image" src="https://github.com/user-attachments/assets/f0f26899-f863-4909-aa60-cfac3b24677c" />
+<img width="1671" height="979" alt="image" src="https://github.com/user-attachments/assets/2bc40d32-de5e-4608-936d-6077009894eb" />
 
 Transfer Learn adapts the retention-time model to your LC column using observations from multiple runs.
 Provide a runs CSV containing `peptide`, `time`, and `run_id`, with at least two runs.
