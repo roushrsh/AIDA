@@ -34,7 +34,7 @@ Run\
 Troubleshooting
 
 
-<h3>**Before you start**</h3>\
+<h3>**Before you start**</h3>
 AIDA is written for Windows and requires XCalibur 4.5 or higher, Tune 4.2.4310.9 and iAPI Access. AIDA has been tested on an Intel i9 14900K, results may differ on slower CPU's.\
 We have provided sample Cell-line, Plasma and Breast-Tumor-Tissue databases, but users can generate their own using FASTA files or the recommended observed peptide libraries.  (see Database Generator).\
 A valid Python executable for the Python-backed tools is needed along with the necessary libraries. (See the Environment Check module.)\
