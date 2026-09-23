@@ -1,7 +1,8 @@
 # AIDA documentation project
 
 <h1>AIDA — AI-Driven Acquisition</h1>
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/ede58a38-c10b-44af-82a7-e8a4b415d233" />
+
+<img width="153" height="102" alt="image" src="https://github.com/user-attachments/assets/077df470-62b0-4554-8415-6e7d381b2450" />
 
 AIDA is an automated, AI-driven mass spectrometry acquisition platform designed for deep, accurate, and high-throughput quantitative proteomics. AIDA autonomously controls and optimizes MS1, MS2, and MS3 acquisition in real time, maximizing proteome coverage while leveraging TMT multiplexing to analyze up to 35 samples simultaneously.
 
