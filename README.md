@@ -22,8 +22,7 @@ AIDA can be downloaded from this Github Directory as AIDAv1p0.exe
 
 <h1>Table of Contents</h1>
 
-Before you start
-
+Before you start\n
 Recommended first workflow
 
 Main
