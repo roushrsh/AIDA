@@ -62,8 +62,7 @@ From there, the user queues the gradient (See 'SampleAIDAGradient.meth'), and hi
 <h2>Environment Check</h2>
 
 Use this tab to check if all required installations are present.
-
-<img width="1472" height="865" alt="image" src="https://github.com/user-attachments/assets/051a26a8-da46-429b-87aa-ecbd75bc0e75" />
+<img width="1075" height="674" alt="image" src="https://github.com/user-attachments/assets/3d6a922e-4d88-41fe-8de0-db62cfa79807" />
 
 Select the Python executable installed which will be used by the AIDA tools.\
 Click Check environment.\
