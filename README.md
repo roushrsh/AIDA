@@ -83,8 +83,11 @@ With quantification disabled, the tab performs the sieving workflow without requ
 <h2>Database Generator</h2>
 This tab produces the peptide database consumed by AIDA workflows.
 
-<img width="1467" height="860" alt="image" src="https://github.com/user-attachments/assets/f60c490c-5523-4d84-84b9-260ab42ba8d5" />
-<img width="402" height="722" alt="image" src="https://github.com/user-attachments/assets/6c9f734a-2bb9-4d64-84d3-284b4edbf9b0" />
+
+<img width="2130" height="1762" alt="image" src="https://github.com/user-attachments/assets/4a78cb10-3a6d-40a5-9a8f-70dc43f48519" />
+
+<img width="792" height="1400" alt="image" src="https://github.com/user-attachments/assets/016fcd89-4dca-4fd3-a1a0-5315dfb4b4bd" />
+
 
 Select peptide/protein text input or FASTA input, then select the TMT label profile. 
 
