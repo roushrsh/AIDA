@@ -161,7 +161,7 @@ The output folder receives the adapted model and plots are generated. Use the ol
 
 The Run tab is the acquisition monitor. It displays startup output and then a concise set of live metrics, including current order, total proteins, and unique proteins with MS3 evidence. The full engine log is written to a timestamped file in the application log directory.\
 
-<h3>**Recommended first workflow**</h3>
+<h3>Recommended first workflow</h3>
 For a first test, we recommend preparing a TMTPro Zero labeled standard Hela sample as described in the AIDA Manuscript (PMID) and running with our cell line database using the default settings post gradient adjustment.
 At completion, open Post Run Script.
 
