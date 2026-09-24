@@ -169,8 +169,9 @@ At completion, open Post Run Script.
 <h2>Advanced</h2>
 Advanced controls are initially locked to protect method defaults. Click an individual lock to edit a row, or use "Unlock all" when deliberately configuring a custom method.
 
-<img width="1475" height="870" alt="image" src="https://github.com/user-attachments/assets/95958924-80d4-4792-9d37-35013c7b3a4a" />
-<img width="725" height="72" alt="image" src="https://github.com/user-attachments/assets/069f509b-08f6-4935-98e2-32b3ceba858b" />
+
+<img width="1530" height="1670" alt="image" src="https://github.com/user-attachments/assets/5445dedb-c903-41a9-b2aa-f41975a522b9" />
+
 
 FAIMS CVs: the three compensation voltages used by the method. Defaults are `-40`, `-55`, and `-70`.\
 MS2 scans per CV: scheduling budget for each FAIMS CV.\
