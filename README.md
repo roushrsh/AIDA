@@ -132,7 +132,7 @@ The result panel reports unique peptides, unique proteins, sieved proteins, andâ
 
 
 <h2>Gradient Cal</h2>
-<img width="1475" height="870" alt="image" src="https://github.com/user-attachments/assets/1d727855-0525-42a3-a73f-88d1a15da6d1" />
+<img width="1179" height="673" alt="image" src="https://github.com/user-attachments/assets/a42def46-6c20-4502-8a69-f2a9d765a461" />
 
 Gradient Cal proposes a revised `%B` program using a target database and a calibration run.\
 Step 1 â€” Target database: select the database, set the retention-order column (default column 4), and click Read. The app reports unique peptide count and median order.\
