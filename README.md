@@ -157,7 +157,9 @@ Select a Python environment with the required GPU/Torch dependencies and click R
 The output folder receives the adapted model and plots are generated. Use the old-vs-new comparison on the held-out run, rather than training loss alone, to decide whether the adaptation is beneficial.\
 
 <h2>Run</h2>
-<img width="1805" height="1462" alt="image" src="https://github.com/user-attachments/assets/044e3a55-f910-4354-bc46-3008cc136c53" />
+<img width="1500" height="1300" alt="image" src="https://github.com/user-attachments/assets/044e3a55-f910-4354-bc46-3008cc136c53" />
+
+<img width="1500" height="1300" alt="image" src="https://github.com/user-attachments/assets/4332b817-42d6-47c9-8fcb-a615dd956715" />
 
 The Run tab is the acquisition monitor. It displays startup output and then a concise set of live metrics, including current order, total proteins, and unique proteins with MS3 evidence. The full engine log is written to a timestamped file in the application log directory.\
 
