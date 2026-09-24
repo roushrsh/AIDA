@@ -16,7 +16,7 @@ AIDA is an automated, AI-driven mass spectrometry acquisition platform designed 
 + **Flexibility and extensibility**: Custom target databases, adjustable acquisition parameters, and interchangeable prediction inputs lets users tailor AIDA to different sample types and experimental objectives.
 
 
-AIDA is currently designed for TMT-multiplexed proteomics on compatible Thermo Scientific Orbitrap Tribrid mass spectrometers, using real-time instrument control through the Thermo Fisher Scientific iAPI.
+AIDA is currently designed for TMT-multiplexed proteomics on compatible Thermo Scientific Orbitrap Tribrid mass spectrometers, using real-time instrument control through the Thermo Fisher Scientific iAPI (https://github.com/thermofisherlsms/iapi).
 
 AIDA can be downloaded from this Github Directory as AIDAv1p0.exe
 
@@ -38,7 +38,7 @@ AIDA can be downloaded from this Github Directory as AIDAv1p0.exe
 <h3>Before you start</h3>
 AIDA is written for Windows and requires XCalibur 4.5 or higher, Tune 4.2.4310.9 and iAPI Access. AIDA has been tested on an Intel i9 14900K, results may differ on slower CPU's.\
 We have provided sample Cell-line, Plasma and Breast-Tumor-Tissue databases, but users can generate their own using FASTA files or the recommended observed peptide libraries.  (see Database Generator).\
-A valid Python executable for the Python-backed tools is needed along with the necessary libraries. (See the Environment Check module.)\
+A valid Python executable for the Python-backed tools is needed along with the necessary libraries. (See the Environment Check module.)
 
 
 <h3>Start the application</h3>
@@ -53,15 +53,15 @@ Options are:
 1. If the sample is TMT 18, or TMT 35. 
 2. The Run time of the Gradient. 
 3. Whether to use the more sensitive AIDA+.
-4. The faster or slower caller.
+4. The faster (light) or slower (Full) caller.
 
-At the top the user chooses the Database they would like to use for real-time acquisition, the output directory for AIDA, and the run number (Recommended to correspond to the XCalibur ID).
+At the top the user chooses the database they would like to use for real-time acquisition, the output directory for AIDA, and the run number (Recommended to correspond to the XCalibur ID).
 
-From there, the user queues the gradient (See 'SampleAIDAGradient.meth'), and hits "Start" to begin acquisition.
+From there, the user queues the gradient (See 'SampleAIDAGradient.meth') in XCalibur with their chosen sample in the corresponding well position, and hit "Start" to begin acquisition. This currently has to be performed for each sample seperately.
 
 <h2>Environment Check</h2>
 
-Use this tab to check if all required installations are present.
+Use this tab to check if all required installations are present. OfflineSearch.dll and search_methods.py come with the AIDA file here and dotnet has to be installed by the user. (https://dotnet.microsoft.com/en-us/download/dotnet/9.0 )
 <img width="1075" height="674" alt="image" src="https://github.com/user-attachments/assets/3d6a922e-4d88-41fe-8de0-db62cfa79807" />
 
 Select the Python executable installed which will be used by the AIDA tools.\
