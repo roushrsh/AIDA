@@ -62,7 +62,7 @@ From there, the user queues the gradient (See 'SampleAIDAGradient.meth') in XCal
 <h2>Environment Check</h2>
 
 Use this tab to check if all required installations are present. OfflineSearch.dll and search_methods.py come with the AIDA file here and dotnet has to be installed by the user. (https://dotnet.microsoft.com/en-us/download/dotnet/9.0 )
-<img width="1075" height="674" alt="image" src="https://github.com/user-attachments/assets/3d6a922e-4d88-41fe-8de0-db62cfa79807" />
+<img width="2357" height="1747" alt="image" src="https://github.com/user-attachments/assets/f4fdc7e4-ab8a-4c88-b37d-0ebe0d0f7f88" />
 
 Select the Python executable installed which will be used by the AIDA tools.\
 Click Check environment.\
