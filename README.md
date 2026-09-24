@@ -71,7 +71,7 @@ If packages are missing, edit the package list if needed and click Install packa
 Installing packages modifies the selected Python environment. Confirm that its path is the intended environment before clicking Install.
 
 <h2>Post Run Script</h2>
-<img width="2799" height="1716" alt="image" src="https://github.com/user-attachments/assets/1a1e41b5-2f03-463d-968a-2526f6dc43a5" />
+<img width="1073" height="671" alt="image" src="https://github.com/user-attachments/assets/a80308f9-1958-46a0-ac3e-dda1226f9339" />
 
 This is the normal downstream step after an AIDA acquisition. It runs post-run protein sieving with mokapot and performs MS3 TMT quantification. \
 After an AIDA run, Chopin CSV, MS3Signal CSV, and output-folder fields are automatically filled and it can be run. You will still need to choose the RAW file. 
@@ -115,8 +115,7 @@ Choose an output database filename, select the Python executable, choose whether
 
 <h2>Offline search</h2>
 Offline search runs the supporting search workflow on a RAW file and reports peptide/protein counts. Note: this is only recommended if the real-time search files are lost, otherwise use the Post Run Script.
-
-<img width="1480" height="877" alt="image" src="https://github.com/user-attachments/assets/ac1fe3dc-6728-469c-91b4-396a35ff9136" />
+<img width="1072" height="670" alt="image" src="https://github.com/user-attachments/assets/3b8a2e5b-2fff-4031-8acb-a22502571199" />
 
 Choose the RAW file.\
 Choose the database: either a CSV/TSV database or a packed database directory.\
