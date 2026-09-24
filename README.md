@@ -142,7 +142,7 @@ Click Optimize gradient.\
 The result side displays fit quality (R²), coverage, CV, the calibration line, a proposed gradient table, and a chart comparing the original and proposed programs. Review the proposed program against instrument, column, and solvent constraints before populating the XCalibur .meth method with the new proposed gradient.
 
 <h2>Transfer Learn</h2>
-<img width="1671" height="979" alt="image" src="https://github.com/user-attachments/assets/2bc40d32-de5e-4608-936d-6077009894eb" />
+<img width="1185" height="672" alt="image" src="https://github.com/user-attachments/assets/39769ce6-50e0-4d9a-bc83-41a1890e434c" />
 
 Transfer Learn adapts the retention-time model to your LC column using observations from multiple runs.\
 Provide a runs CSV containing `peptide`, `time`, and `run_id`, with at least two runs.\
