@@ -114,7 +114,7 @@ Choose an output database filename, select the Python executable, choose whether
 
 <h2>Offline search</h2>
 Offline search runs the supporting search workflow on a RAW file and reports peptide/protein counts. Note: this is only recommended if the real-time search files are lost, otherwise use the Post Run Script.
-<img width="1072" height="670" alt="image" src="https://github.com/user-attachments/assets/3b8a2e5b-2fff-4031-8acb-a22502571199" />
+<img width="2870" height="1697" alt="image" src="https://github.com/user-attachments/assets/b19bcea7-b2eb-4e6b-8e07-c46ce59035fe" />
 
 Choose the RAW file.\
 Choose the database: either a CSV/TSV database or a packed database directory.\
