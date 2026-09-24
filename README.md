@@ -86,7 +86,7 @@ This tab produces the peptide database consumed by AIDA workflows.
 
 <img width="2130" height="1762" alt="image" src="https://github.com/user-attachments/assets/4a78cb10-3a6d-40a5-9a8f-70dc43f48519" />
 
-<img width="792" height="1400" alt="image" src="https://github.com/user-attachments/assets/016fcd89-4dca-4fd3-a1a0-5315dfb4b4bd" />
+<img width="400" height="700" alt="image" src="https://github.com/user-attachments/assets/016fcd89-4dca-4fd3-a1a0-5315dfb4b4bd" />
 
 
 Select peptide/protein text input or FASTA input, then select the TMT label profile. 
