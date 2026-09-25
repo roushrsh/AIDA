@@ -205,28 +205,28 @@ Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest 
 <h2>Output files</h2>
 After running either the Post-Run Script or the Offline-search, AIDA generates output 3 files which contain Protein and/or Peptide level validation at 1% FDR.
 
-1. RunID__FinalProteinOutput.csv\
-2. RunID_PeptideQuant.csv\
-3. RunID_ProteinQuant.csv\
+1. RunID__FinalProteinOutput.csv
+2. RunID_PeptideQuant.csv
+3. RunID_ProteinQuant.csv
 
 They share 40 columns in common (74 if TMT35)\
 These are:
 
-1. Protein - The Protein name (1)\
-2. SSNc - The Sum Signal To Noise For the Protein (1) \
-3. 126 to 135n - The Intensity in the TMT Channels (18 or 35)\
-4. 126SN to 135nSN - The Signal To Noise in each TMT Channel (18 or 35)\
-5. MS3IonSum - The MS3 sum ions per second (1)\
+1. Protein - The Protein name (1)
+2. SSNc - The Sum Signal To Noise For the Protein (1) 
+3. 126 to 135n - The Intensity in the TMT Channels (18 or 35)
+4. 126SN to 135nSN - The Signal To Noise in each TMT Channel (18 or 35)
+5. MS3IonSum - The MS3 sum ions per second (1)
 6. MS3TotalCurr - The MS3 sum total ions (1)
 
 Exclusive to the PeptideQuant.csv are:
 
-7. Peptide - The Peptide ID\
-8. MS1 ID - The Corresponding MS1 the Peptide was found\
-9. LinkedMS2 ID - The MS2 Scan the Peptide was found at\
-10. MS3 Master Scan - the ID from which the final MS3 was called from. (This is because round 2 MS3s scans are called from the previous MS3)\
-11. MS3 ID - The original MS3 ID for the first peptide\
-12. Round - Number of rounds of MS3 called on the Peptide\
-13. MS3IIT - Ion Injection Time for the MS3\
-14. massesChosen - Real time observed fragments which would have been chosen for MS3 if original fragments are set to true, otherwise fragments based on the database provided are used and this column can be ignored.\
+7. Peptide - The Peptide ID
+8. MS1 ID - The Corresponding MS1 the Peptide was found
+9. LinkedMS2 ID - The MS2 Scan the Peptide was found at
+10. MS3 Master Scan - the ID from which the final MS3 was called from. (This is because round 2 MS3s scans are called from the previous MS3)
+11. MS3 ID - The original MS3 ID for the first peptide
+12. Round - Number of rounds of MS3 called on the Peptide
+13. MS3IIT - Ion Injection Time for the MS3
+14. massesChosen - Real time observed fragments which would have been chosen for MS3 if original fragments are set to true, otherwise fragments based on the database provided are used and this column can be ignored.
 15. ifEnoughStatus - If AIDA determined it accumulated enough signal to pass SSN thresholds. 
