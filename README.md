@@ -101,6 +101,7 @@ This tab produces the peptide database consumed by AIDA workflows.
 Select peptide/protein text input or FASTA input, then select the TMT label profile. 
 
 Choose:
+
 -Full build to generate all selected database-model columns. (recommended)
 
 -Score one model to apply a single selected model/version. (generate single features, which the user will have to merge later)
