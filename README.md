@@ -105,14 +105,15 @@ FAIMS CV model to predict with.\
 Fragment-intensity model to predict with. \
 Charge prediction. (not used by AIDA V1 in real time)\ 
 Flyability prediction. (not used by AIDA V1 in real time)\ 
-Note: FAIMS CV and Fragment intensity use V1 by default. V2-Beta is available as an experimental alternative. When Fragment intensity is V1, Charge prediction and Flyability appear directly below it. Selecting Fragment intensity V2-Beta expands the section to show Collision, Energy, Analyzer, and Collision-energy sweep controls.\
+Note: FAIMS CV and Fragment intensity use V1 by default. V2-Beta is available as an experimental alternative. When Fragment intensity is V1, Charge prediction and Flyability appear directly below it. Selecting Fragment intensity V2-Beta expands the section to show Collision Energy, Analyzer, and Collision-energy sweep controls.\
 For V2-Beta Fragment intensity:\
 Select CID or HCD and set the collision energy.\
 Select IonTrap, Orbitrap, or Astral as analyzer. Astral forces HCD.\
-Enable the energy sweep only when a collision-energy sweep is intended.\
+Enable the energy sweep only when a collision-energy sweep is intended.
 
 Score one model settings:\
-Choose FAIMS, Fragment, Order, Charge, or Fly, then choose the applicable version. The Collision/Energy controls appear only for Fragment V2-Beta scoring.
+Choose FAIMS, Fragment, Order, Charge, or Fly, then choose the applicable version. The Collision/Energy controls appear only for Fragment V2-Beta scoring.\
+The score one model only predicts and outputs a file for one of those variables. It is the users responsibility to append it to the original file. This versatility allows users to make their own predictions and files for AIDA to use for targeting.
 
 Choose an output database filename, select the Python executable, choose whether to use GPU, then click Generate database. The output panel reports peptide and database-entry counts, and the log records the invoked workflow.
 
@@ -121,8 +122,8 @@ Offline search runs the supporting search workflow on a RAW file and reports pep
 <img width="2870" height="1697" alt="image" src="https://github.com/user-attachments/assets/b19bcea7-b2eb-4e6b-8e07-c46ce59035fe" />
 
 Choose the RAW file.\
-Choose the database: either a CSV/TSV database or a packed database directory.\
-Select a writable output root.\
+Choose the database: either a CSV/TSV database or a previously packed database's directory. AIDA generates a 'packed' or indexed version of each database the first time it used for offline searches. They can be re-used to save on packing time.\
+Select an output directory.\
 
 Select the search mode:\
 DDA for DDA search.\
@@ -135,17 +136,23 @@ Select the Python location and click Run search.\
 The result panel reports unique peptides, unique proteins, sieved proteins, and—when MS3 quantification is attached—proteins above the SSN cutoff. 
 
 
-<h2>Gradient Cal</h2>
+<h2>Gradient Calibration</h2>
+
+This tool is used to optimize the elution order of peptides for the buffer composition used in each lab.
+
 <img width="1179" height="673" alt="image" src="https://github.com/user-attachments/assets/a42def46-6c20-4502-8a69-f2a9d765a461" />
 
 Gradient Cal proposes a revised `%B` program using a target database and a calibration run.\
-Step 1 — Target database: select the database, set the retention-order column (default column 4), and click Read. The app reports unique peptide count and median order.\
-Step 2 — Coverage target: select the desired order/coverage target. The interface shows the corresponding fraction of the database.\
+Step 1 — Target database: select the database, set the retention-order column (default column 4), and click Read. The app reports unique peptide count and the median predicted peptide order from the corresponding database.\
+Step 2 — Coverage target: select the desired order/coverage of target database. The interface shows the corresponding fraction of the database.\
 Step 3 — Calibration run: select the calibration AIDA*.CSV and enter the gradient program used for that run as Time (min) / %B points.\
 Click Optimize gradient.\
 The result side displays fit quality (R²), coverage, CV, the calibration line, a proposed gradient table, and a chart comparing the original and proposed programs. Review the proposed program against instrument, column, and solvent constraints before populating the XCalibur .meth method with the new proposed gradient.
 
 <h2>Transfer Learn</h2>
+
+This optional tool is used to adapt peptide predicted orders for different column materials. The example below is showing a TMTPro optimized prediction being transferred to unlabeled peptides.
+
 <img width="1185" height="672" alt="image" src="https://github.com/user-attachments/assets/39769ce6-50e0-4d9a-bc83-41a1890e434c" />
 
 Transfer Learn adapts the retention-time model to your LC column using observations from multiple runs.\
@@ -169,7 +176,7 @@ For a first test, we recommend preparing a TMTPro Zero labeled standard Hela sam
 At completion, open Post Run Script.
 
 
-<h2>Advanced</h2>
+<h2>Advanced Options</h2>
 Advanced controls are initially locked to protect method defaults. Click an individual lock to edit a row, or use "Unlock all" when deliberately configuring a custom method.
 
 
@@ -180,9 +187,9 @@ FAIMS CVs: the three compensation voltages used by the method. Defaults are `-40
 MS2 scans per CV: scheduling budget for each FAIMS CV.\
 MSX per MS1: number of MSX scans associated with each MS1 event.\
 Use GPU: enables GPU use where supported. Default is off.\
-Starting order (mid-run): starting elution-order position from `0` to `1`; normally leave at `0`.\
-Target MS3 ions and MS3 ion cutoff: ion targets used for MS3 calling.\ 
-MS3 SSN target: signal-to-noise criterion for MS3 calls.\
+Starting order (mid-run): starting elution-order position from `0` to `1`; normally leave at `0`. This is only if your sample for some reason was interrupted and you know the elution point to start the acquisition at. \
+Target MS3 ions and MS3 ion cutoff: The minimum Ion targets used for MS3 calling.\ 
+MS3 SSN target: Minimum Signal-to-noise criterion for MS3 calls.\
 Min/Max MS3 time and round-2 max time: injection-time bounds in milliseconds. \
 MS3 resolution: 50K, 75K, or 90K.\
 SPS: number of synchronous precursor selection fragments when original fragments are used. \
@@ -192,7 +199,7 @@ Use original MS3 fragments: requests the real-time energy observed original MS3 
 Force analyzer cycle time: applies a fixed analyzer-cycle-time behavior. \
 Plasma mode: allows longer, approximately two-second MS3 injection behavior. \
 Wide MS2 ppm: uses ±12 ppm rather than the ±6 ppm setting. \
-Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest predicted cycle times can be considered. Normal, Fast, and Fastest are enabled by default.
+Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest predicted cycle times can be considered. Normal, Fast, and Fastest are enabled by default. These are calculated as the 1 or 2 standard deviations below or above the predicted ion injection time to achieve the target number of ions, where slowest is 2 SD above and Fastest is 2 SD below.
 
 
 <h2>Output files</h2>
