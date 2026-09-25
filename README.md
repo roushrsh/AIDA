@@ -33,6 +33,7 @@ AIDA can be downloaded from this Github Directory as AIDAv1p0.exe
 * [Transfer Learn](#transfer-learn)
 * [Run](#run)
 * [Advanced](#advanced)
+* [Output Files](#output-files)
 
 
 <h3>Before you start</h3>
@@ -73,8 +74,8 @@ Installing packages modifies the selected Python environment. Confirm that its p
 <img width="1073" height="671" alt="image" src="https://github.com/user-attachments/assets/a80308f9-1958-46a0-ac3e-dda1226f9339" />
 
 This is the normal downstream step after an AIDA acquisition. It runs post-run protein sieving with mokapot and performs MS3 TMT quantification. \
-After an AIDA run, Chopin CSV, MS3Signal CSV, and output-folder fields are automatically filled and it can be run. You will still need to choose the RAW file. 
-Otherwise, provide the RAW file, Chopin CSV, MS3Signal CSV, and output folder. The latter three may already be populated after acquisition.\
+After an AIDA run, Two Input Files are Generated. AIDA*.CSV, MS3SignalAIDA*.CSV, and output-folder fields are automatically filled and it can be run. You will still need to choose the RAW file. 
+Otherwise, provide the RAW file, AIDA.CSV, MS3SignalAIDA.CSV, and output folder. The latter three may already be populated after acquisition.\
 Enable or disable Run Quantification (MS3 TMT). If quantification is enabled, select the TMT plex and SSN cutoff. Defaults are 180 for TMT18 and 350 for TMT35.\
 Choose the Python executable directory location and click Run.\
 With quantification disabled, the tab performs the sieving workflow without requiring RAW/MS3Signal input. The results panel reports peptides at 1%, sieved proteins, and proteins above SSN when quantification was run.
@@ -140,7 +141,7 @@ The result panel reports unique peptides, unique proteins, sieved proteins, and�
 Gradient Cal proposes a revised `%B` program using a target database and a calibration run.\
 Step 1 — Target database: select the database, set the retention-order column (default column 4), and click Read. The app reports unique peptide count and median order.\
 Step 2 — Coverage target: select the desired order/coverage target. The interface shows the corresponding fraction of the database.\
-Step 3 — Calibration run: select the calibration Chopin CSV and enter the gradient program used for that run as Time (min) / %B points.\
+Step 3 — Calibration run: select the calibration AIDA*.CSV and enter the gradient program used for that run as Time (min) / %B points.\
 Click Optimize gradient.\
 The result side displays fit quality (R²), coverage, CV, the calibration line, a proposed gradient table, and a chart comparing the original and proposed programs. Review the proposed program against instrument, column, and solvent constraints before populating the XCalibur .meth method with the new proposed gradient.
 
@@ -194,3 +195,31 @@ Wide MS2 ppm: uses ±12 ppm rather than the ±6 ppm setting. \
 Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest predicted cycle times can be considered. Normal, Fast, and Fastest are enabled by default.
 
 
+<h2>Output files</h2>
+After running either the Post-Run Script or the Offline-search, AIDA generates output 3 files which contain Protein and/or Peptide level validation at 1% FDR.
+
+1. RunID__FinalProteinOutput.csv\
+2. RunID_PeptideQuant.csv\
+3. RunID_ProteinQuant.csv\
+
+They share 40 columns in common (74 if TMT35)\
+These are:
+
+1. Protein - The Protein name (1)\
+2. SSNc - The Sum Signal To Noise For the Protein (1) \
+3. 126 to 135n - The Intensity in the TMT Channels (18 or 35)\
+4. 126SN to 135nSN - The Signal To Noise in each TMT Channel (18 or 35)\
+5. MS3IonSum - The MS3 sum ions per second (1)\
+6. MS3TotalCurr - The MS3 sum total ions (1)
+
+Exclusive to the PeptideQuant.csv are:
+
+7. Peptide - The Peptide ID\
+8. MS1 ID - The Corresponding MS1 the Peptide was found\
+9. LinkedMS2 ID - The MS2 Scan the Peptide was found at\
+10. MS3 Master Scan - the ID from which the final MS3 was called from. (This is because round 2 MS3s scans are called from the previous MS3)\
+11. MS3 ID - The original MS3 ID for the first peptide\
+12. Round - Number of rounds of MS3 called on the Peptide\
+13. MS3IIT - Ion Injection Time for the MS3\
+14. massesChosen - Real time observed fragments which would have been chosen for MS3 if original fragments are set to true, otherwise fragments based on the database provided are used and this column can be ignored.\
+15. ifEnoughStatus - If AIDA determined it accumulated enough signal to pass SSN thresholds. 
