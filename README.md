@@ -64,7 +64,12 @@ From there, the user queues the gradient (See 'SampleAIDAGradient.meth') in XCal
 
 <h2>Environment Check</h2>
 
-Use this tab to check if all required installations are present. OfflineSearch.dll and search_methods.py come with the AIDA file here and dotnet has to be installed by the user. (https://dotnet.microsoft.com/en-us/download/dotnet/9.0 )
+Use this tab to check if all required installations are present. The .dll and .py files come with the AIDA folder in this github. 
+Dotnet has to be installed by the user. (https://dotnet.microsoft.com/en-us/download/dotnet/9.0 )
+As does CUDA, PyTorch and Tensorflow to match your specific CUDA Build.
+For reference in Python 3.8.10 we used Pytorch  2.4.1+cu124 with CUDA 12.4 and cuDNN 9.1, and for TensorFlow GPU 2.7.0 we used CUDA 11.2 and cuDNN 8.x
+
+         —
 <img width="2357" height="1747" alt="image" src="https://github.com/user-attachments/assets/f4fdc7e4-ab8a-4c88-b37d-0ebe0d0f7f88" />
 
 Select the Python executable installed which will be used by the AIDA tools.
@@ -73,6 +78,7 @@ Click Check environment.
 
 If packages are missing, edit the package list if needed and click Install packages.
 Installing packages modifies the selected Python environment. Confirm that its path is the intended environment before clicking Install.
+
 
 <h2>Post Run Script</h2>
 <img width="1073" height="671" alt="image" src="https://github.com/user-attachments/assets/a80308f9-1958-46a0-ac3e-dda1226f9339" />
