@@ -518,54 +518,62 @@ These files are primarily intended for quality control and method development.
 ### `AIDA*.csv`
 
 This file records real-time peptide assignment and scoring information.
+
 Important fields include:
-•	MS2 ID: MS2 scan identifier
-•	cleanedEnds: Amino acid sequence of the peptide.
-•	Reference: UniProt database entry string formatted as db|Accession|Name (separating Swiss-Prot sp or TrEMBL tr designations, UniProt accession number, and protein name via vertical bars).
-•	Charge: Peptide ionization charge state.
-•	DBMass: Theoretical mass of the peptide (Da).
-•	AdjustedMass: Corrected mass deviation of the peptide ion (ppm).
-•	OriginalMass: Uncorrected raw mass deviation of the peptide ion (ppm).
-•	Order: Predicted peptide elution order, dynamically updated in real-time.
-•	peptidesOrder: Baseline predicted peptide elution order derived from the database.
-•	PredScore: Real-time scoring metric for the peptide-spectrum match.
-•	MS1 ID: MS1 scan identifier.
-•	Time: Retention time in minutes.
-•	Cosine: Spectral cosine similarity score for the peptide-spectrum match.
-•	Hit: Total number of predicted fragment ions observed in the MS2 spectrum.
-•	NumberPossible: Theoretical total number of fragment ions predicted to be detectable.
-•	CV: Active FAIMS Compensation Voltage setting.
-•	Analyzer: Specific mass analyzer used for the scan acquisition.
-•	Truth: Target-decoy annotation indicating a match to the forward or reversed database component.
-•	TotalIntOffFrags: Cumulative signal intensity of all MS2 fragment ions assigned to the target peptide.
-•	MS2IntSum: Total integrated signal intensity across the entire MS2 spectrum.
-•	dCn: Delta score measuring the difference in "Hit" count between the top-scoring peptide match and the next best candidate.
+
+-•	MS2 ID: MS2 scan identifier
+-•	cleanedEnds: Amino acid sequence of the peptide.
+-•	Reference: UniProt database entry string formatted as db|Accession|Name (separating Swiss-Prot sp or TrEMBL tr designations, UniProt accession number, and protein name via vertical bars).
+-•	Charge: Peptide ionization charge state.
+-•	DBMass: Theoretical mass of the peptide (Da).
+-•	AdjustedMass: Corrected mass deviation of the peptide ion (ppm).
+-•	OriginalMass: Uncorrected raw mass deviation of the peptide ion (ppm).
+-•	Order: Predicted peptide elution order, dynamically updated in real-time.
+-•	peptidesOrder: Baseline predicted peptide elution order derived from the database.
+-•	PredScore: Real-time scoring metric for the peptide-spectrum match.
+-•	MS1 ID: MS1 scan identifier.
+-•	Time: Retention time in minutes.
+-•	Cosine: Spectral cosine similarity score for the peptide-spectrum match.
+-•	Hit: Total number of predicted fragment ions observed in the MS2 spectrum.
+-•	NumberPossible: Theoretical total number of fragment ions predicted to be detectable.
+-•	CV: Active FAIMS Compensation Voltage setting.
+-•	Analyzer: Specific mass analyzer used for the scan acquisition.
+-•	Truth: Target-decoy annotation indicating a match to the forward or reversed database component.
+-•	TotalIntOffFrags: Cumulative signal intensity of all MS2 fragment ions assigned to the target peptide.
+-•	MS2IntSum: Total integrated signal intensity across the entire MS2 spectrum.
+-•	dCn: Delta score measuring the difference in "Hit" count between the top-scoring peptide match and the next best candidate.
 
 MS2Called-AIDA*.csv
+
 This file describes the MS2 isolation windows selected during acquisition.
+
 Important fields include:
-•	MS1 ID:  MS1 scan identifier.
-•	ScanPoint: Center m/z of the MS2 isolation window.
-•	IT : ion accumulation time
-•	IsoSize : Width of the isolation window (m/z).
-•	Analyzer: Specific mass analyzer used for detection.
-•	MS1 Score : Predictive metric reflecting the statistical likelihood of identifying a novel protein from the selected isolation window.
-•	Resolution:  Resolving power configuration used for MS2 data acquisition.
+
+-•	MS1 ID:  MS1 scan identifier.
+-•	ScanPoint: Center m/z of the MS2 isolation window.
+-•	IT : ion accumulation time
+-•	IsoSize : Width of the isolation window (m/z).
+-•	Analyzer: Specific mass analyzer used for detection.
+-•	MS1 Score : Predictive metric reflecting the statistical likelihood of identifying a novel protein from the selected isolation window.
+-•	Resolution:  Resolving power configuration used for MS2 data acquisition.
 
 MS3SignalAIDA*.csv
+
 This file contains quantitative information for acquired MS3 spectra.
+
 Important fields include:
-•	MS1 ID:  MS1 scan identifier.
-•	MS2 ID:  MS2 scan identifier.
-•	MS3 ID:  MS3 scan identifier.
-•	Peptide:  Amino acid sequence of the peptide.
-•	Protein:  UniProt database entry string formatted as db|Accession|Name (separating Swiss-Prot sp or TrEMBL tr designations, UniProt accession number, and protein name via vertical bars).
-•	TMT reporter-ion intensities:  Signal intensity in the respective TMT reporter ion channel, measured in ions per millisecond (ions/ms).
-•	MS3IonSum:  Total cumulative reporter ion signal intensity (ions/ms).MS3IIT — MS3 ion injection time
-•	MS3IIT:  MS3 ion injection/accumulation time in milliseconds (ms).
-•	MS3TotalCurr: Total accumulated ion count, calculated as MS3IonSum x MS3IIT.
-•	massesChosen : Specific MS2 fragment ion mass-to-charge ratios ($m/z$) isolated for the MS3 event.
-•	Round : Indicates acquisition priority tier: baseline initial MS3 scan (1) or secondary salvage MS3 scan (2).
+
+-•	MS1 ID:  MS1 scan identifier.
+-•	MS2 ID:  MS2 scan identifier.
+-•	MS3 ID:  MS3 scan identifier.
+-•	Peptide:  Amino acid sequence of the peptide.
+-•	Protein:  UniProt database entry string formatted as db|Accession|Name (separating Swiss-Prot sp or TrEMBL tr designations, UniProt accession number, and protein name via vertical bars).
+-•	TMT reporter-ion intensities:  Signal intensity in the respective TMT reporter ion channel, measured in ions per millisecond (ions/ms).
+-•	MS3IonSum:  Total cumulative reporter ion signal intensity (ions/ms).MS3IIT — MS3 ion injection time
+-•	MS3IIT:  MS3 ion injection/accumulation time in milliseconds (ms).
+-•	MS3TotalCurr: Total accumulated ion count, calculated as MS3IonSum x MS3IIT.
+-•	massesChosen : Specific MS2 fragment ion mass-to-charge ratios ($m/z$) isolated for the MS3 event.
+-•	Round : Indicates acquisition priority tier: baseline initial MS3 scan (1) or secondary salvage MS3 scan (2).
 
 
 These acquisition-level files should be retained together with the Thermo `.raw` file for reproducibility and future reanalysis.
