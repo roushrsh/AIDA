@@ -195,7 +195,7 @@ The result side displays fit quality (R²), coverage, CV, the calibration line, 
 
 This optional tool is used to adapt peptide predicted orders for different column materials. The example below is showing a TMTPro optimized prediction being transferred to unlabeled peptides.
 
-<img width="1185" height="672" alt="image" src="https://github.com/user-attachments/assets/39769ce6-50e0-4d9a-bc83-41a1890e434c" />
+<img width="1790" height="1367" alt="image" src="https://github.com/user-attachments/assets/dbbca53c-3840-41c5-baef-2932ca4cc0f0" />
 
 Transfer Learn adapts the retention-time model to your LC column using observations from multiple runs.
 
