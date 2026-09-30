@@ -42,6 +42,7 @@ AIDA is currently designed for TMT-multiplexed proteomics on compatible Thermo S
 * [First AIDA Run: Workflow Overview](#first-aida-run-workflow-overview)
 * [Running AIDA](#running-aida)
 * [Target Databases](#target-databases)
+* [Standardized AIDA Benchmark](#standardized-aida-benchmark)
 
 
 <h3>Before you start</h3>
@@ -256,16 +257,6 @@ FAIMS CV model to predict with.
 
 Fragment-intensity model to predict with. 
 
-Charge prediction. (not used by AIDA V1 in real time)
-
-Flyability prediction. (not used by AIDA V1 in real time)
-Note: FAIMS CV and Fragment intensity use V1 by default. V2-Beta is available as an experimental alternative. When Fragment intensity is V1, Charge prediction and Flyability appear directly below it. Selecting Fragment intensity V2-Beta expands the section to show Collision Energy, Analyzer, and Collision-energy sweep controls.
-
-For V2-Beta Fragment intensity:
-
-Select CID or HCD and set the collision energy.
-Select IonTrap, Orbitrap, or Astral as analyzer. Astral forces HCD.
-Enable the energy sweep only when a collision-energy sweep is intended.
 
 Score one model settings:
 
@@ -371,10 +362,9 @@ Advanced controls are initially locked to protect method defaults. Click an indi
 <img width="1530" height="1670" alt="image" src="https://github.com/user-attachments/assets/5445dedb-c903-41a9-b2aa-f41975a522b9" />
 
 
-####FAIMS CVs:
+FAIMS CVs:
 
 Defines the FAIMS compensation voltages used during acquisition.
-
 AIDA cycles through three CV settings. The standard workflows used in the accompanying study used:
 
 `-40 V, -55 V, -70 V`
@@ -383,37 +373,52 @@ Alternative CV combinations can be used but should be validated for the sample t
 
 
 
-####MS2 scans per CV: scheduling budget for each FAIMS CV.
+MS2 scans per CV: Scheduling budget for each FAIMS CV.
+Defines the number of MS2 acquisition events allocated to each FAIMS CV cycle.
 
-####MSX per MS1: number of MSX scans associated with each MS1 event.
 
-####Use GPU: enables GPU use where supported. Default is off.
+MSX per MS1: Number of MSX scans associated with each MS1 event.
+Defines the number of multiplexed MS2 discovery scans acquired during otherwise unused processing time between AIDA-controlled acquisition events.
+On slower systems, up to two MSX scans can increase duty-cycle utilization.
 
-####Starting order (mid-run): starting elution-order position from `0` to `1`; normally leave at `0`. This is only if your sample for some reason was interrupted and you know the elution point to start the acquisition at. 
 
-####Target MS3 ions and MS3 ion cutoff: The minimum Ion targets used for MS3 calling.
+Use GPU: enables GPU use where supported. Default is off.
+Enables GPU acceleration for supported AIDA model inference and MS2 window-selection operations. GPU acceleration can reduce real-time processing latency but is not required.
 
-####MS3 SSN target: Minimum Signal-to-noise criterion for MS3 calls.
+Starting order (mid-run): starting elution-order position from `0` to `1`; normally leave at `0`. This is only if your sample for some reason was interrupted and you know the elution point to start the acquisition at. 
 
-####Min/Max MS3 time and round-2 max time: injection-time bounds in milliseconds. 
+Target MS3 ions and MS3 ion cutoff: The minimum Ion targets used for MS3 calling.
+Higher values increase quantitative signal but may increase acquisition time.
 
-####MS3 resolution: 50K, 75K, or 90K.
+MS3 SSN target: Minimum Signal-to-noise criterion for MS3 calls.
+Higher values increase quantitative signal but may increase acquisition time.
 
-####SPS: number of synchronous precursor selection fragments when original fragments are used. 
+Min/Max MS3 time and round-2 max time: injection-time bounds in milliseconds.
+Increasing these values can improve reporter-ion signal for low-abundance peptides at the cost of acquisition speed.
 
-####Call round 2 scans: enables the second-round scan behavior. 
+MS3 resolution: 50K, 75K, or 90K. Defines Orbitrap resolving power for MS3 reporter-ion acquisition.
+The higher resolution used for TMT35 is required to resolve the smaller reporter-ion mass differences of the expanded plex.
 
-####Minimum for overs: preserves the minimum-fill behavior for overs.
+SPS: number of synchronous precursor selection fragments when original fragments are used. 
+Under normal AIDA operation, fragment selection is optimized dynamically and this setting is ignored.
 
-####Use original MS3 fragments: requests the real-time energy observed original MS3 fragment behavior.
+Call round 2 scans: enables the second-round scan behavior. 
+Enables secondary salvage MS3 acquisition for peptides that do not reach the required quantitative signal during the first MS3 event.
 
-####Force analyzer cycle time: applies a fixed analyzer-cycle-time behavior. 
+Minimum for overs: preserves the minimum-fill behavior for overs.
+Adjusts the threshold used to determine whether a salvage MS3 scan should be triggered. This option is normally used together with **Call Round 2 Scans**.
 
-####Plasma mode: allows longer, approximately two-second MS3 injection behavior. 
+Use original MS3 fragments: requests the real-time energy observed original MS3 fragment behavior.
+Disables AIDA's optimized MS3 fragment-selection strategy and instead selects the most intense observed MS2 fragment ions.
 
-####Wide MS2 ppm: uses ±12 ppm rather than the ±6 ppm setting. 
+Force analyzer cycle time: applies a fixed analyzer-cycle-time behavior. 
+Forces the initial MS3 acquisition to use the analyzer-cycle timing rather than the complete AIDA-predicted accumulation time. 
 
-####Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest predicted cycle times can be considered. Normal, Fast, and Fastest are enabled by default. These are calculated as the 1 or 2 standard deviations below or above the predicted ion injection time to achieve the target number of ions, where slowest is 2 SD above and Fastest is 2 SD below.
+Plasma mode: allows longer, approximately two-second MS3 injection behavior. This option should be selected when analyzing plasma proteomics samples.
+
+Wide MS2 ppm: uses ±12 ppm rather than the ±6 ppm setting. Experimental setting for when an analyzer is not properly calibrated, not recommended.
+
+Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest predicted cycle times can be considered. Normal, Fast, and Fastest are enabled by default. These are calculated as the 1 or 2 standard deviations below or above the predicted ion injection time to achieve the target number of ions, where slowest is 2 SD above and Fastest is 2 SD below.
 
 
 <h2>Output files</h2>
@@ -576,3 +581,60 @@ Important fields include:
 - **Round** — initial or salvage MS3 acquisition
 
 These acquisition-level files should be retained together with the Thermo `.raw` file for reproducibility and future reanalysis.
+
+
+
+
+<h2>Standardized AIDA Benchmark</h2>
+
+Before analyzing experimental samples on a new AIDA installation, we recommend verifying system performance using the standardized AIDA HeLa benchmark.
+
+The benchmark uses a commercially available HeLa protein digest standard:
+
+**Pierce HeLa Protein Digest Standard, catalog 88328**
+
+The digest is labeled using **TMTpro Zero** and analyzed using the standardized AIDA acquisition conditions provided with the reference dataset.
+
+The benchmark is intended to verify that:
+
+- AIDA communicates correctly with the mass spectrometer
+- Real-time acquisition proceeds normally
+- Peptide identification and MS3 acquisition are functioning
+- Post-run processing completes successfully
+- Proteome coverage and acquisition behavior are within the expected range
+
+---
+
+# Experimental and Beta Features
+
+> **The features in this section are under active development and were not required for the AIDA workflows described in the accompanying manuscript. They are provided for testing and method-development purposes and may change between software builds.**
+
+The stable AIDA workflow described above should be used for reproducing the experiments reported in the manuscript.
+
+## Offline Search
+
+AIDA includes experimental utilities for evaluating DIA-style offline search workflows.
+
+DIA-Faster (beta) for the faster DIA mode.
+DIA (beta) for the broader DIA mode.
+For DIA, set Top MS1 peaks. `1` uses only the most intense precursor candidate per isolation window; higher values consider more candidates and take longer.
+
+These functions are under active development and are not part of the validated AIDA acquisition and analysis workflow described in the accompanying manuscript.
+Results generated using these modes should therefore be independently validated before biological interpretation.
+
+## Database Generator
+
+Charge prediction. (not used by AIDA V1 in real time)
+
+Flyability prediction. (not used by AIDA V1 in real time)
+
+Note: FAIMS CV and Fragment intensity use V1 by default. V2-Beta is available as an experimental alternative. When Fragment intensity is V1, Charge prediction and Flyability appear directly below it. Selecting Fragment intensity V2-Beta expands the section to show Collision Energy, Analyzer, and Collision-energy sweep controls.
+
+For V2-Beta Fragment intensity:
+
+Select CID or HCD and set the collision energy.
+Select IonTrap, Orbitrap, or Astral as analyzer. Astral forces HCD.
+Enable the energy sweep only when a collision-energy sweep is intended.
+
+Fragment Prediction V2 is not required for the validated AIDA v1.0 workflow described in the accompanying manuscript.
+The model architecture, inputs, and output format may change in future builds.
