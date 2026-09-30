@@ -241,9 +241,9 @@ Select peptide/protein text input or FASTA input, then select the TMT label prof
 
 Choose:
 
--Full build to generate all selected database-model columns. (recommended)
++ Full build to generate all selected database-model columns. (recommended)
 
--Score one model to apply a single selected model/version. (generate single features, which the user will have to merge later)
++ Score one model to apply a single selected model/version. (generate single features, which the user will have to merge later)
 
 **Full build settings:**
 
@@ -251,11 +251,11 @@ Set charge states, precursor mass range, reverse/decoy behavior, and optional me
 
 The model section lets you select:
 
-Order / retention-time model and its model file (This is provided if transfer learning has occurred).
++ Order / retention-time model and its model file (This is provided if transfer learning has occurred).
 
-FAIMS CV model to predict with.
++ FAIMS CV model to predict with.
 
-Fragment-intensity model to predict with. 
++ Fragment-intensity model to predict with. 
 
 
 Score one model settings:
@@ -273,21 +273,21 @@ After generating a new database, perform **Gradient Calibration** before using i
 Offline search runs the supporting search workflow on a RAW file and reports peptide/protein counts. Note: this is only recommended if the real-time search files are lost, otherwise use the Post Run Script.
 <img width="2870" height="1697" alt="image" src="https://github.com/user-attachments/assets/b19bcea7-b2eb-4e6b-8e07-c46ce59035fe" />
 
-Choose the RAW file.
++ Choose the RAW file.
 
-Choose the database: either a CSV/TSV database or a previously packed database's directory. AIDA generates a 'packed' or indexed version of each database the first time it used for offline searches. They can be re-used to save on packing time.
++ Choose the database: either a CSV/TSV database or a previously packed database's directory. AIDA generates a 'packed' or indexed version of each database the first time it used for offline searches. They can be re-used to save on packing time.
 
-Select an output directory.
++ Select an output directory.
 
-Select the search mode:
++ Select the search mode:
 
-DDA for DDA search.
++ DDA for DDA search.
 
-Leave Tight MS2 ppm off for the default ±12 ppm search window; enable it for ±6 ppm.
++ Leave Tight MS2 ppm off for the default ±12 ppm search window; enable it for ±6 ppm.
 
-Optionally enable Attach MS3 quant, then provide the MS3Signal CSV, TMT plex, and SSN cutoff. Note, similar to other search engines, using the same database is paramount for obtaining reproducible PSM matching MS3 results.
++ Optionally enable Attach MS3 quant, then provide the MS3Signal CSV, TMT plex, and SSN cutoff. Note, similar to other search engines, using the same database is paramount for obtaining reproducible PSM matching MS3 results.
 
-Select the Python location and click Run search.
++ Select the Python location and click Run search.
 
 The result panel reports unique peptides, unique proteins, sieved proteins, and—when MS3 quantification is attached—proteins above the SSN cutoff. 
 
@@ -302,11 +302,11 @@ AIDA predicts peptide chromatographic behavior primarily as an elution order rat
 
 Gradient Cal proposes a revised `%B` program using a target database and a calibration run.
 
-Step 1 — Target database: select the database, set the retention-order column (default column 4), and click Read. The app reports unique peptide count and the median predicted peptide order from the corresponding database.
++ Step 1 — Target database: select the database, set the retention-order column (default column 4), and click Read. The app reports unique peptide count and the median predicted peptide order from the corresponding database.
 
-Step 2 — Coverage target: select the desired order/coverage of target database. The interface shows the corresponding fraction of the database.
++ Step 2 — Coverage target: select the desired order/coverage of target database. The interface shows the corresponding fraction of the database.
 
-Step 3 — Calibration run: select the calibration AIDA*.CSV and enter the gradient program used for that run as Time (min) / %B points.
++ Step 3 — Calibration run: select the calibration AIDA*.CSV and enter the gradient program used for that run as Time (min) / %B points.
 
 Click Optimize gradient.
 
