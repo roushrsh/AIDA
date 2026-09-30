@@ -209,7 +209,7 @@ Protein-level filtering uses a target-decoy strategy and is performed using the 
 
 The Post Run Script generates three primary processed outputs:
 
-### `RunID_FinalProteinOutput.csv`
+#### `RunID_FinalProteinOutput.csv`
 
 Contains protein-level identification and filtering information for the acquisition.
 
