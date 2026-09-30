@@ -89,8 +89,6 @@ Before beginning an acquisition, use the **Environment Check** tab to verify tha
 The **Main** tab contains the settings required for a standard AIDA acquisition.
 <img width="1665" height="1367" alt="image" src="https://github.com/user-attachments/assets/a9358b7b-a37b-475a-a6bd-25f1412014c7" />
 
-**Run Number** assigns a unique identifier to the acquisition and its associated output files. Use a different run number for each acquisition.
-
 
 ### Run Number
 
