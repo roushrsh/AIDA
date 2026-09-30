@@ -15,10 +15,15 @@ AIDA is an automated, AI-driven mass spectrometry acquisition platform designed 
 
 + **Flexibility and extensibility**: Custom target databases, adjustable acquisition parameters, and interchangeable prediction inputs lets users tailor AIDA to different sample types and experimental objectives.
 
+AIDA can be operated through its graphical user interface. In a standard workflow, the user provides a target peptide/protein database and defines the acquisition conditions. AIDA then performs real-time target prioritization, adaptive precursor isolation, peptide identification, and MS3-based quantitative acquisition.
 
+
+## Obtaining AIDA
+
+To request the most up-to-date available build of AIDA, please email [whaas@mgh.harvard.edu](mailto:whaas@mgh.harvard.edu) or [shajizadeh@mgh.harvard.edu](mailto:shajizadeh@mgh.harvard.edu) with the subject line **"AIDA Software"**.
+Please include your institution (for example, MIT) and the mass spectrometer model on which AIDA will be used. A Recipient Agreement must be completed and signed before the software can be provided or used.
 AIDA is currently designed for TMT-multiplexed proteomics on compatible Thermo Scientific Orbitrap Tribrid mass spectrometers, using real-time instrument control through the Thermo Fisher Scientific iAPI (https://github.com/thermofisherlsms/iapi).
 
-AIDA can be downloaded from this Github Directory as AIDAv1p0.exe
 
 <h1>Table of Contents</h1>
 
@@ -34,42 +39,117 @@ AIDA can be downloaded from this Github Directory as AIDAv1p0.exe
 * [Run](#run)
 * [Advanced](#advanced)
 * [Output Files](#output-files)
-
+*[First AIDA Run: Workflow Overview](#first-aida-run-workflow-overview)
 
 <h3>Before you start</h3>
-AIDA is written for Windows and requires XCalibur 4.5 or higher, Tune 4.2.4310.9 and iAPI Access. AIDA has been tested on an Intel i9 14900K, results may differ on slower CPU's.
 
-We have provided sample Cell-line, Plasma and Breast-Tumor-Tissue databases, but users can generate their own using FASTA files or the recommended observed peptide libraries.  (see Database Generator).
+AIDA performs real-time instrument control and therefore requires a compatible mass spectrometer, instrument-control software, and sufficiently fast computational hardware.
 
-A valid Python executable for the Python-backed tools is needed along with the necessary libraries. (See the Environment Check module.)
+### Instrument requirements
 
-Ok I added "To get the most up to date public build of AIDA, please email [whaas@mgh.harvard.edu](mailto:whaas@mgh.harvard.edu) or [shajizadeh@mgh.harvard.edu](mailto:shajizadeh@mgh.harvard.edu) with the caption "AIDA Software". Please include your institution (e.g. MIT) and instrument details to receive a Recipient Agreement  that must be signed prior to its use.
+The current AIDA implementation supports Thermo Fisher Scientific Tribrid mass spectrometers capable of the required real-time MS3 acquisition workflow. AIDA has been developed and extensively evaluated using the Orbitrap Eclipse.
+
+AIDA requires:
+
+- Thermo Fisher Scientific iAPI for real-time instrument control
+- Thermo Fisher Scientific Xcalibur
+- Thermo Fisher Scientific Tune
+- A compatible FAIMS interface when FAIMS-based acquisition is used
+- A Windows workstation connected to the mass spectrometer
+
+AIDA v1.0 was developed using Orbitrap Eclipse Tune Application **4.2.4310.9**. Use of substantially different instrument-control software versions should be validated before routine acquisition.
+
+### Computational requirements
+
+AIDA performs model inference and acquisition decisions while the mass spectrometer is operating. The real-time processing workflow is therefore sensitive to computational latency.
+
+AIDA has been successfully tested using:
+
+- Intel Core i9-13900K and i9-14900K CPUs
+- NVIDIA RTX 3080 and RTX 4090 GPUs
+
+GPU acceleration is supported but is not required for all AIDA acquisition modes. CPU-only operation is supported for the standard acquisition workflow.
+
+The maximum acceptable real-time processing latency is approximately **80 ms**. Systems with substantially slower processing may reduce acquisition efficiency.
+
+### Software environment
+
+Some AIDA utilities use Python-based machine-learning packages. The exact Python, CUDA, PyTorch, and TensorFlow requirements depend on the AIDA build being used.
+
+Before beginning an acquisition, use the **Environment Check** tab to verify that the required software dependencies and hardware interfaces are available.
 
 
-<h3>Start the application</h3>
-After downloading, launch `AIDAv1p0.exe`. Keep the executable together with its dependency files.
 
 
 <h2>Main</h2>
-The Main tab contains the minimum settings needed to start an acquisition.
+The **Main** tab contains the settings required for a standard AIDA acquisition.
 <img width="1790" height="1365" alt="image" src="https://github.com/user-attachments/assets/0f8caff0-c878-4b12-8764-5fbf2330c8bf" />
 
-Options are:
-1. If the sample is TMT 18, or TMT 35. 
-2. The Run time of the Gradient. 
-3. Whether to use the more sensitive AIDA+.
-4. The faster (light) or slower (Full) caller.
+**Run Number** assigns a unique identifier to the acquisition and its associated output files. Use a different run number for each acquisition.
 
-At the top the user chooses the database they would like to use for real-time acquisition, the output directory for AIDA, and the run number (Recommended to correspond to the XCalibur ID).
 
-From there, the user queues the gradient (See 'SampleAIDAGradient.meth') in XCalibur with their chosen sample in the corresponding well position, and hit "Start" to begin acquisition. This currently has to be performed for each sample seperately.
+## Main
+
+The **Main** tab contains the settings required for a standard AIDA acquisition.
+
+### Run Number
+
+**Run Number** assigns a unique identifier to the acquisition and its associated output files. Use a different run number for each acquisition.
+
+### Database
+
+Select the AIDA target database to be used for the acquisition.
+
+AIDA is a global targeted proteomics method. The database defines the peptide and protein targets that AIDA considers during real-time acquisition. The database can be generated using the **Database Generator** tab or obtained from the provided AIDA reference databases.
+
+### Output
+
+Select the folder in which AIDA acquisition files will be written.
+
+We recommend using a separate output folder for each experiment or sample set.
+
+### TMT Plex
+
+Select the TMT multiplexing format used for the sample:
+
+- **18**: TMT18
+- **35**: TMT35
+
+This setting controls acquisition parameters that depend on the reporter-ion multiplexing chemistry, including MS3 acquisition and resolving-power requirements.
+
+### Run Time
+
+**Run Time** defines the duration, in minutes, over which AIDA performs active real-time data acquisition.
+
+This value should correspond to the analytical portion of the LC gradient during which peptide acquisition is desired.
+
+### AIDA+
+
+The **AIDA+** toggle enables the AIDA+ acquisition strategy.
+
+AIDA+ optimizes MS2 fragment-ion selection to increase MS3 reporter-ion signal and thereby increase proteome coverage and quantitative sensitivity. Standard AIDA places greater emphasis on minimizing quantitative interference, whereas AIDA+ prioritizes reporter-ion signal and acquisition sensitivity.
+
+The setting used should therefore be selected according to the goals of the experiment.
+
+### Smart Caller: Full and Fast
+
+The **Smart Caller** setting controls the algorithm used to select MS2 precursor isolation windows.
+
+**Fast** uses a streamlined set of acquisition features to rapidly rank candidate MS2 windows.
+
+**Full** performs additional feature extraction and evaluates candidate windows using the complete AIDA decision framework before dynamically selecting the highest-value non-overlapping windows.
+
+Full is recommended for routine AIDA acquisition when sufficient computational performance is available. Fast provides a lower-computation alternative.
+
+Changing advanced acquisition parameters is not required for a standard run. Additional controls are available under **Advanced Options**.
+
+
+
 
 <h2>Environment Check</h2>
 
-Use this tab to check if all required installations are present. The .dll and .py files come with the AIDA folder in this github. 
-Dotnet has to be installed by the user. (https://dotnet.microsoft.com/en-us/download/dotnet/9.0 )
-As does CUDA, PyTorch and Tensorflow to match your specific CUDA Build.
-For reference in Python 3.8.10 we used Pytorch  2.4.1+cu124 with CUDA 12.4 and cuDNN 9.1, and for TensorFlow GPU 2.7.0 we used CUDA 11.2 and cuDNN 8.x
+The **Environment Check** tab verifies that the software components required by AIDA are available before an acquisition is started.
+
 
          —
 <img width="2357" height="1747" alt="image" src="https://github.com/user-attachments/assets/f4fdc7e4-ab8a-4c88-b37d-0ebe0d0f7f88" />
@@ -81,6 +161,21 @@ Click Check environment.
 If packages are missing, edit the package list if needed and click Install packages.
 Installing packages modifies the selected Python environment. Confirm that its path is the intended environment before clicking Install.
 
+We recommend running Environment Check after:
+- Installing AIDA for the first time
+- Updating AIDA
+- Updating Python or machine-learning packages
+- Updating GPU drivers or CUDA
+- Updating Xcalibur, Tune, or iAPI components
+- Moving AIDA to a new acquisition computer
+
+The check evaluates the local software environment and reports whether required components can be accessed.
+A successful Environment Check indicates that the AIDA software environment is configured correctly. It does **not** independently verify LC performance, instrument calibration, or sample preparation.
+
+The .dll and .py files come with the AIDA folder in this github. 
+Dotnet has to be installed by the user. (https://dotnet.microsoft.com/en-us/download/dotnet/9.0 )
+As does CUDA, PyTorch and Tensorflow to match your specific CUDA Build.
+For reference in Python 3.8.10 we used Pytorch  2.4.1+cu124 with CUDA 12.4 and cuDNN 9.1, and for TensorFlow GPU 2.7.0 we used CUDA 11.2 and cuDNN 8.x
 
 <h2>Post Run Script</h2>
 <img width="1073" height="671" alt="image" src="https://github.com/user-attachments/assets/a80308f9-1958-46a0-ac3e-dda1226f9339" />
@@ -297,3 +392,21 @@ Exclusive to the PeptideQuant.csv are:
 13. MS3IIT - Ion Injection Time for the MS3
 14. massesChosen - Real time observed fragments which would have been chosen for MS3 if original fragments are set to true, otherwise fragments based on the database provided are used and this column can be ignored.
 15. ifEnoughStatus - If AIDA determined it accumulated enough signal to pass SSN thresholds. 
+
+
+<h2>First AIDA Run: Workflow Overview</h2>
+
+For a new AIDA installation, we recommend completing the following workflow before analyzing experimental samples:
+
+1. **Run Environment Check** to confirm that the required software, models, and instrument-control components are available.
+2. **Select or generate an AIDA target database.**
+3. **Perform Gradient Calibration** so that the target database is aligned to the local LC gradient.
+4. Configure the acquisition in the **Main** tab.
+5. Load the provided `SampleAIDAGradient.meth` method in Xcalibur.
+6. Start the LC-MS acquisition.
+7. Start AIDA from the **Main** tab.
+8. After acquisition, process the run using the **Post Run Script**.
+9. Inspect the resulting peptide- and protein-level output files.
+10. Before analyzing experimental samples, validate the installation using the standardized AIDA HeLa benchmark described below.
+
+For routine use after the system has been validated, most acquisitions require only the **Main** and **Post Run Script** tabs.
