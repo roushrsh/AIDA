@@ -43,8 +43,8 @@ We have provided sample Cell-line, Plasma and Breast-Tumor-Tissue databases, but
 
 A valid Python executable for the Python-backed tools is needed along with the necessary libraries. (See the Environment Check module.)
 
-To get the most up to date public build of AIDA, please email whaas@mgh.harvard.edu or shajizadeh@mgh.harvard.edu with the caption "AIDA Software".
-Please include your institution (e.g. MIT) and instrument details.
+Ok I added "To get the most up to date public build of AIDA, please email [whaas@mgh.harvard.edu](mailto:whaas@mgh.harvard.edu) or [shajizadeh@mgh.harvard.edu](mailto:shajizadeh@mgh.harvard.edu) with the caption "AIDA Software". Please include your institution (e.g. MIT) and instrument details to receive a Recipient Agreement  that must be signed prior to its use.
+
 
 <h3>Start the application</h3>
 After downloading, launch `AIDAv1p0.exe`. Keep the executable together with its dependency files.
