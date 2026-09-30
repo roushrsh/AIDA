@@ -349,10 +349,6 @@ After transfer learning, use the adapted model when generating the corresponding
 The Run tab is the acquisition monitor. It displays startup output and then a concise set of live metrics, including current order, total proteins, and unique proteins with MS3 evidence. The full engine log is written to a timestamped file in the application log directory.
 
 
-<h3>Recommended first workflow</h3>
-For a first test, we recommend preparing a TMTpro Zero-labeled HeLa standard sample as described in the accompanying AIDA manuscript and using the provided cell-line target database. Following the initial run, use Gradient Calibration to optimize the LC gradient before performing the standardized benchmark acquisition.
-
-
 <h2>Advanced Options</h2>
 The default AIDA settings are intended to provide robust performance for the sample types and acquisition configurations evaluated during development. Most users should begin with the defaults.
 Advanced settings can be modified to optimize acquisition for different sample amounts, chromatographic gradients, TMT plexes, or sample dynamic ranges.
