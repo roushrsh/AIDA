@@ -34,10 +34,10 @@ AIDA is currently designed for TMT-multiplexed proteomics on compatible Thermo S
 * [Post Run Script](#post-run-script)
 * [Database Generator](#database-generator)
 * [Offline search](#offline-search)
-* [Gradient Cal](#gradient-cal)
+* [Gradient Calibration](#gradient-calibration)
 * [Transfer Learn](#transfer-learn)
 * [Run](#run)
-* [Advanced](#advanced)
+* [Advanced Options](#advanced-options)
 * [Output Files](#output-files)
 * [First AIDA Run: Workflow Overview](#first-aida-run-workflow-overview)
 * [Running AIDA](#running-aida)
@@ -74,7 +74,7 @@ AIDA has been successfully tested using:
 
 GPU acceleration is supported but is not required for all AIDA acquisition modes. CPU-only operation is supported for the standard acquisition workflow.
 
-The maximum acceptable real-time processing latency is approximately **80 ms**. Systems with substantially slower processing may reduce acquisition efficiency.
+The maximum acceptable real-time processing latency is approximately **100 ms**. Systems with substantially slower processing may reduce acquisition efficiency.
 
 ### Software environment
 
@@ -170,10 +170,12 @@ We recommend running Environment Check after:
 The check evaluates the local software environment and reports whether required components can be accessed.
 A successful Environment Check indicates that the AIDA software environment is configured correctly. It does **not** independently verify LC performance, instrument calibration, or sample preparation.
 
-The .dll and .py files come with the AIDA folder in this github. 
-Dotnet has to be installed by the user. (https://dotnet.microsoft.com/en-us/download/dotnet/9.0 )
-As does CUDA, PyTorch and Tensorflow to match your specific CUDA Build.
-For reference in Python 3.8.10 we used Pytorch  2.4.1+cu124 with CUDA 12.4 and cuDNN 9.1, and for TensorFlow GPU 2.7.0 we used CUDA 11.2 and cuDNN 8.x
+The required AIDA `.dll` and `.py` files are provided with the AIDA software distribution.
+
+.NET must be installed separately by the user. (https://dotnet.microsoft.com/en-us/download/dotnet/9.0 ) GPU-accelerated utilities additionally require compatible CUDA, cuDNN, PyTorch, and/or TensorFlow installations appropriate for the AIDA build being used.
+
+For reference, our tested environments included Python 3.8.10 with PyTorch 2.4.1+cu124/CUDA 12.4 for PyTorch-based GPU workflows, and TensorFlow GPU 2.7.0 with CUDA 11.2/cuDNN 8.x for TensorFlow-based workflows.
+
 
 <h2>Post Run Script</h2>
 <img width="1073" height="671" alt="image" src="https://github.com/user-attachments/assets/a80308f9-1958-46a0-ac3e-dda1226f9339" />
@@ -260,9 +262,9 @@ Fragment-intensity model to predict with.
 
 Score one model settings:
 
-Choose FAIMS, Fragment, Order, Charge, or Fly, then choose the applicable version. The Collision/Energy controls appear only for Fragment V2-Beta scoring.
+Choose FAIMS, Fragment, or Order, then choose the applicable model version.
 
-The score one model only predicts and outputs a file for one of those variables. It is the users responsibility to append it to the original file. This versatility allows users to make their own predictions and files for AIDA to use for targeting.
+The Score one model workflow predicts and outputs a file containing the selected variable. The user can then append this feature to an existing AIDA database when developing a customized target database.
 
 Choose an output database filename, select the Python executable, choose whether to use GPU, then click Generate database. The output panel reports peptide and database-entry counts, and the log records the invoked workflow.
 
@@ -313,7 +315,7 @@ Click Optimize gradient.
 The result side displays fit quality (R²), coverage, CV, the calibration line, a proposed gradient table, and a chart comparing the original and proposed programs. Review the proposed program against instrument, column, and solvent constraints before populating the XCalibur .meth method with the new proposed gradient.
 
 
-Gradient calibration does not require retraining the underlying retention-time model. Instead, it adapts the target database to the observed relationship between predicted peptide elution order and the local gradient.
+Gradient calibration does not require retraining the underlying retention-time model. Instead, it uses the relationship between predicted peptide elution order and experimentally observed retention time to propose an LC `%B` program that better distributes the target peptide population across the analytical gradient.
 Minor run-to-run retention-time deviations are handled automatically by AIDA during real-time acquisition and do not normally require recalibration.
 
 
@@ -350,8 +352,7 @@ The Run tab is the acquisition monitor. It displays startup output and then a co
 
 
 <h3>Recommended first workflow</h3>
-For a first test, we recommend preparing a TMTPro Zero labeled standard Hela sample as described in the AIDA Manuscript (PMID) and running with our cell line database using the default settings post gradient adjustment.
-At completion, open Post Run Script.
+For a first test, we recommend preparing a TMTpro Zero-labeled HeLa standard sample as described in the accompanying AIDA manuscript and using the provided cell-line target database. Following the initial run, use Gradient Calibration to optimize the LC gradient before performing the standardized benchmark acquisition.
 
 
 <h2>Advanced Options</h2>
@@ -422,9 +423,9 @@ Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest 
 
 
 <h2>Output files</h2>
-After running either the Post-Run Script or the Offline-search, AIDA generates output 3 files which contain Protein and/or Peptide level validation at 1% FDR.
+When MS3 quantification is enabled, the Post Run Script generates three primary processed output files:
 
-1. RunID__FinalProteinOutput.csv
+1. RunID_FinalProteinOutput.csv
 2. RunID_PeptideQuant.csv
 3. RunID_ProteinQuant.csv
 
@@ -435,8 +436,8 @@ These are:
 2. SSNc - The Sum Signal To Noise For the Protein (1) 
 3. 126 to 135n - The Intensity in the TMT Channels (18 or 35)
 4. 126SN to 135nSN - The Signal To Noise in each TMT Channel (18 or 35)
-5. MS3IonSum - The MS3 sum ions per second (1)
-6. MS3TotalCurr - The MS3 sum total ions (1)
+5. MS3IonSum - Total cumulative TMT reporter-ion signal intensity (ions/ms) (1)
+6. MS3TotalCurr - Total accumulated reporter-ion count, calculated as MS3IonSum × MS3IIT (1)
 
 Exclusive to the PeptideQuant.csv are:
 
@@ -457,14 +458,14 @@ For a new AIDA installation, we recommend completing the following workflow befo
 
 1. **Run Environment Check** to confirm that the required software, models, and instrument-control components are available.
 2. **Select or generate an AIDA target database.**
-3. **Perform Gradient Calibration** so that the target database is aligned to the local LC gradient.
-4. Configure the acquisition in the **Main** tab.
-5. Load the provided `SampleAIDAGradient.meth` method in Xcalibur.
-6. Start the LC-MS acquisition.
-7. Start AIDA from the **Main** tab.
-8. After acquisition, process the run using the **Post Run Script**.
-9. Inspect the resulting peptide- and protein-level output files.
-10. Before analyzing experimental samples, validate the installation using the standardized AIDA HeLa benchmark described below.
+3. Configure the acquisition in the **Main** tab.
+4. Load the provided `SampleAIDAGradient.meth` method in Xcalibur.
+5. Perform an initial AIDA calibration/benchmark run.
+6. Process the run using the **Post Run Script**.
+7. Use the resulting `AIDA*.CSV` with **Gradient Calibration** to optimize the LC `%B` program for the local chromatography.
+8. Update the Xcalibur method with the proposed gradient.
+9. Perform the standardized AIDA HeLa benchmark using the optimized gradient.
+10. Inspect the resulting peptide- and protein-level outputs and confirm that system performance is within the expected range.
 
 For routine use after the system has been validated, most acquisitions require only the **Main** and **Post Run Script** tabs.
 
