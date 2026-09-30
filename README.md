@@ -177,7 +177,7 @@ The result panel reports unique peptides, unique proteins, sieved proteins, andâ
 
 This tool is used to optimize the elution order of peptides for the buffer composition used in each lab.
 
-<img width="1179" height="673" alt="image" src="https://github.com/user-attachments/assets/a42def46-6c20-4502-8a69-f2a9d765a461" />
+<img width="1782" height="1365" alt="image" src="https://github.com/user-attachments/assets/641c8fb5-b0c5-491b-9f80-c9c666c7815e" />
 
 Gradient Cal proposes a revised `%B` program using a target database and a calibration run.
 
