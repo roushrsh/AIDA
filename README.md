@@ -83,7 +83,7 @@ Before beginning an acquisition, use the **Environment Check** tab to verify tha
 
 <h2>Main</h2>
 The **Main** tab contains the settings required for a standard AIDA acquisition.
-<img width="1790" height="1365" alt="image" src="https://github.com/user-attachments/assets/0f8caff0-c878-4b12-8764-5fbf2330c8bf" />
+<img width="1527" height="1375" alt="image" src="https://github.com/user-attachments/assets/43b25149-57b0-420c-8e5a-bc5354abb762" />
 
 **Run Number** assigns a unique identifier to the acquisition and its associated output files. Use a different run number for each acquisition.
 
@@ -146,8 +146,6 @@ Changing advanced acquisition parameters is not required for a standard run. Add
 
 The **Environment Check** tab verifies that the software components required by AIDA are available before an acquisition is started.
 
-
-         —
 <img width="2357" height="1747" alt="image" src="https://github.com/user-attachments/assets/f4fdc7e4-ab8a-4c88-b37d-0ebe0d0f7f88" />
 
 Select the Python executable installed which will be used by the AIDA tools.
