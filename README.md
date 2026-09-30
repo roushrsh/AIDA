@@ -39,7 +39,7 @@ AIDA is currently designed for TMT-multiplexed proteomics on compatible Thermo S
 * [Run](#run)
 * [Advanced](#advanced)
 * [Output Files](#output-files)
-*[First AIDA Run: Workflow Overview](#first-aida-run-workflow-overview)
+* [First AIDA Run: Workflow Overview](#first-aida-run-workflow-overview)
 
 <h3>Before you start</h3>
 
@@ -87,10 +87,6 @@ The **Main** tab contains the settings required for a standard AIDA acquisition.
 
 **Run Number** assigns a unique identifier to the acquisition and its associated output files. Use a different run number for each acquisition.
 
-
-## Main
-
-The **Main** tab contains the settings required for a standard AIDA acquisition.
 
 ### Run Number
 
