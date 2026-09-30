@@ -357,7 +357,7 @@ Advanced controls are initially locked to protect method defaults. Click an indi
 <img width="1530" height="1670" alt="image" src="https://github.com/user-attachments/assets/5445dedb-c903-41a9-b2aa-f41975a522b9" />
 
 
-FAIMS CVs:
++ FAIMS CVs:
 
 Defines the FAIMS compensation voltages used during acquisition.
 AIDA cycles through three CV settings. The standard workflows used in the accompanying study used:
@@ -368,52 +368,52 @@ Alternative CV combinations can be used but should be validated for the sample t
 
 
 
-MS2 scans per CV: Scheduling budget for each FAIMS CV.
++ MS2 scans per CV: Scheduling budget for each FAIMS CV.
 Defines the number of MS2 acquisition events allocated to each FAIMS CV cycle.
 
 
-MSX per MS1: Number of MSX scans associated with each MS1 event.
++ MSX per MS1: Number of MSX scans associated with each MS1 event.
 Defines the number of multiplexed MS2 discovery scans acquired during otherwise unused processing time between AIDA-controlled acquisition events.
 On slower systems, up to two MSX scans can increase duty-cycle utilization.
 
 
-Use GPU: enables GPU use where supported. Default is off.
++ Use GPU: enables GPU use where supported. Default is off.
 Enables GPU acceleration for supported AIDA model inference and MS2 window-selection operations. GPU acceleration can reduce real-time processing latency but is not required.
 
-Starting order (mid-run): starting elution-order position from `0` to `1`; normally leave at `0`. This is only if your sample for some reason was interrupted and you know the elution point to start the acquisition at. 
++ Starting order (mid-run): starting elution-order position from `0` to `1`; normally leave at `0`. This is only if your sample for some reason was interrupted and you know the elution point to start the acquisition at. 
 
-Target MS3 ions and MS3 ion cutoff: The minimum Ion targets used for MS3 calling.
++ Target MS3 ions and MS3 ion cutoff: The minimum Ion targets used for MS3 calling.
 Higher values increase quantitative signal but may increase acquisition time.
 
-MS3 SSN target: Minimum Signal-to-noise criterion for MS3 calls.
++ MS3 SSN target: Minimum Signal-to-noise criterion for MS3 calls.
 Higher values increase quantitative signal but may increase acquisition time.
 
-Min/Max MS3 time and round-2 max time: injection-time bounds in milliseconds.
++ Min/Max MS3 time and round-2 max time: injection-time bounds in milliseconds.
 Increasing these values can improve reporter-ion signal for low-abundance peptides at the cost of acquisition speed.
 
-MS3 resolution: 50K, 75K, or 90K. Defines Orbitrap resolving power for MS3 reporter-ion acquisition.
++ MS3 resolution: 50K, 75K, or 90K. Defines Orbitrap resolving power for MS3 reporter-ion acquisition.
 The higher resolution used for TMT35 is required to resolve the smaller reporter-ion mass differences of the expanded plex.
 
-SPS: number of synchronous precursor selection fragments when original fragments are used. 
++ SPS: number of synchronous precursor selection fragments when original fragments are used. 
 Under normal AIDA operation, fragment selection is optimized dynamically and this setting is ignored.
 
-Call round 2 scans: enables the second-round scan behavior. 
++ Call round 2 scans: enables the second-round scan behavior. 
 Enables secondary salvage MS3 acquisition for peptides that do not reach the required quantitative signal during the first MS3 event.
 
-Minimum for overs: preserves the minimum-fill behavior for overs.
++ Minimum for overs: preserves the minimum-fill behavior for overs.
 Adjusts the threshold used to determine whether a salvage MS3 scan should be triggered. This option is normally used together with **Call Round 2 Scans**.
 
-Use original MS3 fragments: requests the real-time energy observed original MS3 fragment behavior.
++ Use original MS3 fragments: requests the real-time energy observed original MS3 fragment behavior.
 Disables AIDA's optimized MS3 fragment-selection strategy and instead selects the most intense observed MS2 fragment ions.
 
-Force analyzer cycle time: applies a fixed analyzer-cycle-time behavior. 
++ Force analyzer cycle time: applies a fixed analyzer-cycle-time behavior. 
 Forces the initial MS3 acquisition to use the analyzer-cycle timing rather than the complete AIDA-predicted accumulation time. 
 
-Plasma mode: allows longer, approximately two-second MS3 injection behavior. This option should be selected when analyzing plasma proteomics samples.
++ Plasma mode: allows longer, approximately two-second MS3 injection behavior. This option should be selected when analyzing plasma proteomics samples.
 
-Wide MS2 ppm: uses ±12 ppm rather than the ±6 ppm setting. Experimental setting for when an analyzer is not properly calibrated, not recommended.
++ Wide MS2 ppm: uses ±12 ppm rather than the ±6 ppm setting. Experimental setting for when an analyzer is not properly calibrated, not recommended.
 
-Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest predicted cycle times can be considered. Normal, Fast, and Fastest are enabled by default. These are calculated as the 1 or 2 standard deviations below or above the predicted ion injection time to achieve the target number of ions, where slowest is 2 SD above and Fastest is 2 SD below.
++ Predicted cycle times: select which of Slowest, Slow, Normal, Fast, and Fastest predicted cycle times can be considered. Normal, Fast, and Fastest are enabled by default. These are calculated as the 1 or 2 standard deviations below or above the predicted ion injection time to achieve the target number of ions, where slowest is 2 SD above and Fastest is 2 SD below.
 
 
 <h2>Output files</h2>
